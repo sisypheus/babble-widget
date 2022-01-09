@@ -16,7 +16,7 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
       with:
         source: "."
-        target: "/home/${{ secrets.USERNAME }}/embed"
+        target: "/home/theo/embed"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master

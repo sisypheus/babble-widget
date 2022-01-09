@@ -16,7 +16,7 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
       with:
         source: "."
-        target: "/home/theo/embed/build"
+        target: "/home/theo/embed"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master
@@ -25,4 +25,4 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script: npm install && npm run build
+        script: cd /home/theo/embed && npm install && npm run build

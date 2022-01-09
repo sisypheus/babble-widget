@@ -15,7 +15,7 @@ jobs:
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
       with:
-        source: "./build"
+        source: "."
         target: "/home/${{ secrets.USERNAME }}/embed"
 
     - name: Executing remote command

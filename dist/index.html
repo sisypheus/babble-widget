@@ -14,27 +14,9 @@
     There is also an additional snippet on the right top corner, that demonstrates ability to embed multiple widgets
     with different configurations and keep their instances separate:
   </p>
-  <code>
-        <pre>
-&lt;script&gt;
-    (function (w, d, s, o, f, js, fjs) {
-        w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
-        js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
-        js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
-    }(window, document, 'script', 'aw1', './widget.js'));
-    aw1('init', { minimized: true, disableDarkMode: true });
-&lt;/script&gt;
-&lt;style&gt;
-    #widget-aw1 .main-root-3PoTs {
-        right: auto;
-        left: 10px
-    }
-&lt;/style&gt;
-        </pre>
-    </code>
 
-  <p>
-    To fire an event that handled inside widget, click <a href="javascript:;" onclick="aw1('event', 'open')">here to
+  <p>fire an event that handled inside widget, click <a href="javascript:;" onclick="aw1('event', 'open')">here
+      to
       open</a>,
     and here <a href="javascript:;" onclick="aw1('event', 'close')">to close it</a>.
   </p>
@@ -68,18 +50,6 @@
     Libero
     nec eu dolor eget volutpat. Magna nulla neque. Fames tempus lorem duis orci ipsum.</p>
   <p>Orci purus ante excepteur nunc nascetur rhoncus taciti ut. Ornare vitae sed. Amet suspendisse integer rutrum
-    aliquet
-    venenatis. Nec sed nullam mauris magna vel pretium non tristique. Porta justo ac dictumst aliquip blandit.
-    Libero
-    nec eu dolor eget volutpat. Magna nulla neque. Fames tempus lorem duis orci ipsum.</p>
-  <p>Orci purus ante excepteur nunc nascetur rhoncus taciti ut. Ornare vitae sed. Amet suspendisse integer
-    rutrum
-    aliquet
-    venenatis. Nec sed nullam mauris magna vel pretium non tristique. Porta justo ac dictumst aliquip blandit.
-    Libero
-    nec eu dolor eget volutpat. Magna nulla neque. Fames tempus lorem duis orci ipsum.</p>
-  <p>Orci purus ante excepteur nunc nascetur rhoncus taciti ut. Ornare vitae sed. Amet suspendisse integer
-    rutrum
     aliquet
     venenatis. Nec sed nullam mauris magna vel pretium non tristique. Porta justo ac dictumst aliquip blandit.
     Libero

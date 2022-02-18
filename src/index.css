@@ -39,12 +39,7 @@
   line-height: var(--line-height);
 }
 
-.reset ol li, .reset ul li {
-  padding: 0.2rem 0;
-}
-
 .reset p {
-  margin: 0.75rem 0;
   padding: 0;
 }
 
@@ -68,8 +63,6 @@
   display: inline-block;
   font-size: medium;
   font-weight: bold;
-  margin: 1.5rem 0 0.5rem 0;
-  padding: 0.4rem 2rem;
 }
 
 .reset button:hover:not(:disabled) {

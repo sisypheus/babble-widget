@@ -2,22 +2,44 @@ import { h } from 'preact';
 import '../index.css';
 import chat_icon from '../assets/icon_chat.svg';
 import { GlobalContext } from '../AppContext';
-import { useContext } from 'preact/hooks';
+import { useContext, useEffect, useState } from 'preact/hooks';
+import socketIOClient from "socket.io-client";
 
 const Widget = () => {
 	const { widgetOpen, setWidgetOpen } = useContext(GlobalContext);
+	const [socket, setSocket] = useState(null);
+	const [message, setMessage] = useState('');
 
 	const handleClick = () => {
 		setWidgetOpen(!widgetOpen);
 	}
 
+	const handleChange = (e) => {
+		setMessage(e.target.value);
+	}
+
+	const sendMessage = () => {
+		socket.emit('message', message);
+		setMessage('');
+	}
+
+	useEffect(() => {
+		const socket = socketIOClient('http://localhost:8080');
+		setSocket(socket);
+	}, [])
+
 	return (
 		<div className='reset'>
 			<div className='fixed bottom-0 right-0 sm:p-6 sm:mb-[4rem]'>
-				<div onClick={() => (console.log('click'))} className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-200 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
+				<div className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-200 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
 					<div>top</div>
 					<div className='relative'>
-						<div className='fixed bottom-0'>bottom</div>
+						<div className='fixed bottom-0 w-full flex items-center justify-center'>
+							<div className="flex items-center justify-center w-full">
+								<input className="w-full" onChange={handleChange} value={message} />
+								<button onClick={sendMessage}>send</button>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div className='fixed bottom-0 right-0 p-6'>

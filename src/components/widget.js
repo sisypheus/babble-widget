@@ -4,11 +4,13 @@ import chat_icon from '../assets/icon_chat.svg';
 import { GlobalContext } from '../AppContext';
 import { useContext, useEffect, useState } from 'preact/hooks';
 import socketIOClient from "socket.io-client";
+import { v4 as uuidv4 } from 'uuid';
 
 const Widget = () => {
 	const { widgetOpen, setWidgetOpen } = useContext(GlobalContext);
 	const [socket, setSocket] = useState(null);
 	const [message, setMessage] = useState('');
+	const [customerId, setCustomerId] = useState(localStorage.getItem('BABBLE_CUSTOMER_ID'));
 
 	const handleClick = () => {
 		setWidgetOpen(!widgetOpen);
@@ -19,8 +21,15 @@ const Widget = () => {
 	}
 
 	const sendMessage = () => {
-		socket.emit('message', message);
-		setMessage('');
+		if (message.length > 0) {
+			if (!customerId || customerId.length === 0) {
+				const newCustomerId = uuidv4();
+				setCustomerId(newCustomerId);
+				localStorage.setItem('BABBLE_CUSTOMER_ID', newCustomerId);
+			}
+			socket.emit('message', message);
+			setMessage('');
+		}
 	}
 
 	useEffect(() => {

@@ -16,6 +16,7 @@ module.exports = (env) => {
       static: {
         directory: path.join(__dirname, bundleOutputDir)
       },
+      port: 9000,
     },
     plugins: isDevBuild
       ? [new webpack.SourceMapDevToolPlugin(), new copyWebpackPlugin({ patterns: [{ from: 'dev/' }] })]

@@ -22,20 +22,26 @@ const Widget = () => {
 
 	const sendMessage = () => {
 		if (message.length > 0) {
-			if (!customerId || customerId.length === 0) {
-				const newCustomerId = uuidv4();
-				setCustomerId(newCustomerId);
-				localStorage.setItem('BABBLE_CUSTOMER_ID', newCustomerId);
-			}
 			socket.emit('message', message);
 			setMessage('');
 		}
 	}
 
 	useEffect(() => {
-		const socket = socketIOClient('http://localhost:8080');
+		if (!customerId) {
+			const uuid = uuidv4();
+			localStorage.setItem('BABBLE_CUSTOMER_ID', uuid);
+			setCustomerId(uuid);
+			return;
+		}
+		const socket = socketIOClient('http://localhost:8080', {
+			auth: {
+				token: customerId,
+				clientID: 'prout',
+			}
+		});
 		setSocket(socket);
-	}, [])
+	}, [customerId]);
 
 	return (
 		<div className='reset'>

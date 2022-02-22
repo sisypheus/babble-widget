@@ -22,9 +22,13 @@ const Widget = () => {
 
 	const sendMessage = () => {
 		if (message.length > 0) {
-			socket.emit('message', message);
+			socket.emit('message', message, customerId);
 			setMessage('');
 		}
+	}
+
+	const receiveMessage = (message, test) => {
+		console.log('receiveMessage', message, test);
 	}
 
 	useEffect(() => {
@@ -40,6 +44,7 @@ const Widget = () => {
 				clientID: 'prout',
 			}
 		});
+		socket.on('message', receiveMessage);
 		setSocket(socket);
 	}, [customerId]);
 

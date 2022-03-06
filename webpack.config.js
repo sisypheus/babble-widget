@@ -22,7 +22,7 @@ module.exports = (env) => {
       ? [new webpack.SourceMapDevToolPlugin(), new copyWebpackPlugin({ patterns: [{ from: 'dev/' }] })]
       : [],
     optimization: {
-      minimize: !isDevBuild
+      minimize: !isDevBuild,
     },
     mode: isDevBuild ? 'development' : 'production',
     module: {

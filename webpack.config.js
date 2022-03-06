@@ -1,10 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 var copyWebpackPlugin = require('copy-webpack-plugin');
-const bundleOutputDir = './dist';
 
 module.exports = (env) => {
-  const isDevBuild = !(env && env.prod);
+  const isDevBuild = env?.prod ? false : true;
+  const bundleOutputDir = isDevBuild ? './dist' : './build';
 
   return [{
     entry: './src/index.js',
@@ -35,7 +35,7 @@ module.exports = (env) => {
           use: ['style-loader', 'css-loader', 'postcss-loader'],
         },
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(js|jsx|ts|tsx)$/,
           exclude: /node_modules/,
           use: [
             {
@@ -49,6 +49,10 @@ module.exports = (env) => {
                     corejs: 3,
                     useBuiltIns: 'usage',
                   }],
+                  [
+                    '@babel/typescript',
+                    { jsxPragma: "h" }
+                  ],
                 ],
                 'plugins': [
                   // syntax sugar found in React components
@@ -67,7 +71,7 @@ module.exports = (env) => {
         }]
     },
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }
   }];
 };

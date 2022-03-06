@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --config webpack.config.js",
+    "build-release": "webpack --config webpack.config.js --env prod",
     "start": "webpack-dev-server --open --config webpack.config.js",
-    "serve": "sirv build --port 8080 --cors --single",
     "dev": "preact watch",
     "lint": "eslint src",
     "test": "jest"
@@ -22,8 +22,9 @@
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
     "autoprefixer": "^10.4.2",
-    "babel-loader": "^8.0.0-beta.6",
+    "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.4",
     "core-js": "^3.21.0",
     "css-loader": "^6.6.0",

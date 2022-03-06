@@ -14,9 +14,10 @@
     There is also an additional snippet on the right top corner, that demonstrates ability to embed multiple widgets
     with different configurations and keep their instances separate:
   </p>
-
-  <p>fire an event that handled inside widget, click <a href="javascript:;" onclick="aw1('event', 'open')">here
-      to
+        
+  <p>
+    fdsqffdsqfdsqfTo fire an event that handled inside widget, click <a href="javascript:;"
+      onclick="aw1('event', 'open')">here to
       open</a>,
     and here <a href="javascript:;" onclick="aw1('event', 'close')">to close it</a>.
   </p>
@@ -49,11 +50,14 @@
     venenatis. Nec sed nullam mauris magna vel pretium non tristique. Porta justo ac dictumst aliquip blandit.
     Libero
     nec eu dolor eget volutpat. Magna nulla neque. Fames tempus lorem duis orci ipsum.</p>
-  <p>Orci purus ante excepteur nunc nascetur rhoncus taciti ut. Ornare vitae sed. Amet suspendisse integer rutrum
-    aliquet
-    venenatis. Nec sed nullam mauris magna vel pretium non tristique. Porta justo ac dictumst aliquip blandit.
-    Libero
-    nec eu dolor eget volutpat. Magna nulla neque. Fames tempus lorem duis orci ipsum.</p>
+  <button id="button" style="position: fixed; bottom:0; right: 0; margin: 10rem">test</button>
+
+  <script>
+    let button = document.getElementById('button');
+    button.addEventListener('click', () => {
+      console.log('yteah baby');
+    });
+  </script>
 
   <script>
     (function (w, d, s, o, f, js, fjs) {

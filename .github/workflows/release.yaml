@@ -23,6 +23,6 @@ jobs:
         npm run build-release
         git config user.name "CI/CD"
         git config user.email "CI/CD"
-        git add build
+        git add build -f
         git commit -am "Build release"
         git push

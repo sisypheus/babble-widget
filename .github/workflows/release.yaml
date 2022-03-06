@@ -23,4 +23,4 @@ jobs:
         npm run build-release
         git config user.name "CI/CD"
         git config user.email "CI/CD"
-        git diff --name-only --diff-filter=AMDR @~..@ | grep -q build | git add build && git commit -m "CICD: Build release" && git push
+        git diff --name-only --diff-filter=AMDR @~..@ | grep -q build && git add build && git commit -m "CICD: Build release" && git push

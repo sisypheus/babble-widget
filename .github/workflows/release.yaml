@@ -20,10 +20,7 @@ jobs:
 
     - name: Build release and push it
       run: |
-        rm -rf build || true
         npm run build-release
         git config user.name "CI/CD"
         git config user.email "CI/CD"
-        git add build -f
-        git commit -am "CI: Build release"
-        git push
+        git diff --name-only --diff-filter=AMDR @~..@ | grep -q build | git add build && git commit -m "CICD: Build release" && git push

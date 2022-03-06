@@ -19,7 +19,6 @@ jobs:
       run: npm install
 
     - name: Build release and push it
-    - uses: actions/checkout@v2
       run: |
         npm run build-release
         git config user.name "CI/CD"

@@ -15,12 +15,17 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install dependencies
-      run: npm install
+    - name: Install dependencies and build the project
+      run: npm install && npm run build-release
 
-    - name: Build release and push it
-      run: |
-        npm run build-release
-        git config user.name "CI/CD"
-        git config user.email "CI/CD"
-        git diff --name-only --diff-filter=AMDR @~..@ | grep -q build && git add -f build && git commit -m "CICD: Build release" && git push
+    - name: Push it to release repository
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'build/widget.js'
+        destination_repo: 'sisypheus/babble-widget-release'
+        destination_folder: '.'
+        user_email: 'CICD'
+        user_name: 'CICD'
+        commit_message: 'CICD: New release'

@@ -10,39 +10,41 @@ interface InfraConfigurations {
 export interface AppConfigurations {
   debug: boolean;
   serviceBaseUrl: string;
-  minimized: boolean;
-  disableDarkMode: boolean;
-  text: {
-    minimizedTitle?: string;
-    formTitle?: string;
-    formSubTitle?: string;
-    thankYouTitle?: string;
-    thankYouBody?: string;
-    faqTitle?: string;
-  };
-  styles: {
-    classNameContainer?: string;
-  };
+  clientId: string;
+  clientUrl: string;
+  initialMessage: string;
+
+  widget: {
+    initialMessage: string;
+    minimized: boolean;
+    title: string;
+    subtitle: string;
+    requireEmail: boolean;
+    // green dot to let user know if someone is connected
+    // to the other end of the chat
+    activityIndicator: boolean;
+  }
 }
 
 export type Configurations = InfraConfigurations & AppConfigurations;
 
-export interface FaqModel {
-  question: string;
-  answer: string;
-}
-
-export interface FormModel {
-  email: string;
-  message: string;
-}
-
 export interface WidgetApi {
-  getFaq: () => Promise<FaqModel[]>;
-  sendForm: (model: FormModel) => Promise<void>;
+  sendMessage: (message: string, file?: File) => Promise<void>;
+  customerExists: (customerId: string) => Promise<boolean>;
+  getMessages: (handler: Function) => Promise<Message[]>;
 }
 
 export interface Globals {
   widgetOpen: boolean;
-  setWidgetOpen: (open: boolean) => void;
+  toggleWidget: (open: boolean) => void;
+}
+
+export interface Message {
+  sender: string;
+  message: string;
+  date: Date;
+}
+
+export interface Customer {
+  pricingPlan: number;
 }

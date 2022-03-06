@@ -7,7 +7,7 @@ module.exports = (env) => {
   const bundleOutputDir = isDevBuild ? './dist' : './build';
 
   return [{
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
       filename: 'widget.js',
       path: path.resolve(bundleOutputDir),

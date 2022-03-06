@@ -29,3 +29,4 @@ jobs:
         user_email: 'CICD'
         user_name: 'CICD'
         commit_message: 'CICD: New release'
+        destination_branch: 'master'

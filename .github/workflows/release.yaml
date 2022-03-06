@@ -18,5 +18,12 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build bundle with webpack in release mode
-      run: npm run build-release
+    - name: Build release and push it
+    - uses: actions/checkout@v2
+      run: |
+        npm run build-release
+        git config user.name "CI/CD"
+        git config user.email "CI/CD"
+        git add build
+        git commit -am "Build release"
+        git push

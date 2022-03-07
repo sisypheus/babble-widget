@@ -5,12 +5,16 @@ import { GlobalContext } from '../AppContext';
 import { useContext, useEffect, useState } from 'preact/hooks';
 import socketIOClient, { Socket } from "socket.io-client";
 import { v4 as uuidv4 } from 'uuid';
+import { ConfigContext } from '../AppContext';
 
 const Widget = () => {
 	const { widgetOpen, toggleWidget } = useContext(GlobalContext);
 	const [socket, setSocket] = useState<Socket | null>(null);
 	const [message, setMessage] = useState('');
 	const [customerId, setCustomerId] = useState(localStorage.getItem('BABBLE_CUSTOMER_ID'));
+	const config = useContext(ConfigContext);
+
+	console.log(config.widget.mainColor);
 
 	const handleClick = () => {
 		toggleWidget(!widgetOpen);
@@ -64,7 +68,7 @@ const Widget = () => {
 					</div>
 				</div>
 				<div className='fixed bottom-0 right-0 p-6'>
-					<img onClick={handleClick} className='bg-blue-600 p-4 rounded-md w-8 h-8 cursor-pointer' src={chat_icon} alt='chat' />
+					<img style={{'backgroundColor': config.widget.mainColor}} onClick={handleClick} className={`p-4 rounded-md w-8 h-8 cursor-pointer`} src={chat_icon} alt='chat' />
 				</div>
 			</div>
 		</div >

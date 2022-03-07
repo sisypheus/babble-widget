@@ -60,7 +60,8 @@ export default (
 
     switch (methodName) {
       case 'init':
-        const loadedObject = Object.assign(defaultConfig, item[1]);
+        // Merge default configuration with user configuration
+        let loadedObject = Object.assign(defaultConfig, item[1]);
         if (loadedObject.debug) {
           console.log(`Starting widget [${instanceName}]`, loadedObject);
         }

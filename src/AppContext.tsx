@@ -17,11 +17,12 @@ export const AppContextProvider = ({ children, element, config }: Props) => {
   const [widgetOpen, toggleWidget] = useState(false);
 
   const services = useRef(new ApiClient({
-    baseUrl: config?.serviceBaseUrl,
-    debug: config?.debug,
-    clientId: config?.clientId,
-    clientUrl: config?.clientUrl,
+    baseUrl: config.apiBaseUrl,
+    debug: config.debug,
+    clientId: config.clientId,
   }))
+
+  console.log(config);
 
   return (
     <ConfigContext.Provider value={config}>

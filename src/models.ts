@@ -9,17 +9,17 @@ interface InfraConfigurations {
  */
 export interface AppConfigurations {
   debug: boolean;
-  serviceBaseUrl: string;
+  apiBaseUrl: string;
+  socketBaseUrl: string;
   clientId: string;
-  clientUrl: string;
-  initialMessage: string;
-
+  
   widget: {
     initialMessage: string;
     minimized: boolean;
     title: string;
     subtitle: string;
     requireEmail: boolean;
+    mainColor: string;
     // green dot to let user know if someone is connected
     // to the other end of the chat
     activityIndicator: boolean;

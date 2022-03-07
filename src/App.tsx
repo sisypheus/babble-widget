@@ -6,8 +6,9 @@ import { AppContextProvider } from './AppContext';
 type Props = Configurations;
 
 export const App = ({element, ...appSettings}: Props) => {
+  console.log(appSettings)
   return (
-    <AppContextProvider element={element}>
+    <AppContextProvider element={element!} config={appSettings}>
       <Widget />
     </AppContextProvider>
   )

@@ -14,7 +14,7 @@
     There is also an additional snippet on the right top corner, that demonstrates ability to embed multiple widgets
     with different configurations and keep their instances separate:
   </p>
-        
+
   <p>
     fdsqffdsqfdsqfTo fire an event that handled inside widget, click <a href="javascript:;"
       onclick="aw1('event', 'open')">here to
@@ -65,7 +65,9 @@
       js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
       js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
     }(window, document, 'script', 'aw1', './widget.js'));
-    aw1('init', { minimized: true, disableDarkMode: true });
+    aw1('init',
+      { minimized: true, disableDarkMode: true, mainColor: "#1da1f1" }
+    );
   </script>
 
 </body>

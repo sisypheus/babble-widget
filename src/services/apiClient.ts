@@ -5,7 +5,6 @@ import { WidgetApi, Message } from '../models';
 interface ApiClientOptions {
   baseUrl: string;
   clientId: string;
-  clientUrl: string;
   debug?: boolean;
 }
 
@@ -14,7 +13,7 @@ export class ApiClient implements WidgetApi {
   private readonly chatClient: ChatClient;
 
   constructor(options: ApiClientOptions) {
-
+    let url = window.location.href;
   }
 
   public getMessages(handler: Function): Promise<Message[]> {

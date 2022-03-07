@@ -1,19 +1,28 @@
 import { h, render } from 'preact';
 import { App } from './App';
 import loader from './loader';
+import { AppConfigurations } from './models';
 
-const configuration = {
+const defaultConfiguration: AppConfigurations = {
   debug: false,
-  serviceBaseUrl: 'https://help-widget-backend.glitch.me',
-  minimized: false,
-  disableDarkMode: false,
-  text: {},
-  styles: {}
+  apiBaseUrl: process.env.API_URL || 'http://localhost:8080',
+  socketBaseUrl: process.env.SOCKET_URL || 'http://localhost:8000',
+  clientId: '',
+
+  widget: {
+    initialMessage: 'Welcome to your chat widget, here you can communicate with us.',
+    minimized: false,
+    title: 'Chat',
+    subtitle: '',
+    requireEmail: false,
+    mainColor: '#2563eb',
+    activityIndicator: false,
+  }
 }
 
 loader(
   window,
-  configuration,
+  defaultConfiguration,
   window.document.currentScript,
   (el, config) => render(h(App, { ...config, element: el }), el)
 )

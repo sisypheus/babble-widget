@@ -1,3 +1,4 @@
+import socketIOClient, { Socket } from 'socket.io-client';
 import axios, { AxiosResponse, AxiosError, AxiosInstance } from 'axios';
 import { WidgetApi, Message } from '../models';
 
@@ -10,6 +11,7 @@ interface ApiClientOptions {
 
 export class ApiClient implements WidgetApi {
   private readonly client: AxiosInstance;
+  private readonly chatClient: ChatClient;
 
   constructor(options: ApiClientOptions) {
 
@@ -38,5 +40,26 @@ export class ApiClient implements WidgetApi {
       resolve(true);
     }
     );
+  }
+}
+
+export class ChatClient {
+  private socket: Socket;
+
+  constructor(customerId: string, clientId: string) { }
+
+  public initConnection(customerId: string, clientId: string) {
+    this.socket = socketIOClient(process.env.SOCKET_URL || 'http://localhost:8080', {
+      auth: {
+        token: customerId,
+        clientId: clientId,
+      }
+    });
+  }
+
+  public sendMessage(message: string, file?: File) {
+    this.socket.emit('')
+
+    // TODO handle file upload
   }
 }

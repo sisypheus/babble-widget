@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const dotenv = require('dotenv').config();
 var copyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env) => {
@@ -19,7 +20,16 @@ module.exports = (env) => {
       port: 9000,
     },
     plugins: isDevBuild
-      ? [new webpack.SourceMapDevToolPlugin(), new copyWebpackPlugin({ patterns: [{ from: 'dev/' }] })]
+      ? [
+        new webpack.SourceMapDevToolPlugin(),
+        new copyWebpackPlugin({ patterns: [{ from: 'dev/' }] }),
+        new webpack.DefinePlugin({
+          'process.env': {
+            'API_URL': JSON.stringify(process.env.PREACT_APP_API_URL),
+            'SOCKET_URL': JSON.stringify(process.env.PREACT_APP_SOCKET_URL),
+          },
+        }),
+      ]
       : [],
     optimization: {
       minimize: !isDevBuild,

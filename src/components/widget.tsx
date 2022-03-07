@@ -3,31 +3,32 @@ import '../index.css';
 import chat_icon from '../assets/icon_chat.svg';
 import { GlobalContext } from '../AppContext';
 import { useContext, useEffect, useState } from 'preact/hooks';
-import socketIOClient from "socket.io-client";
+import socketIOClient, { Socket } from "socket.io-client";
 import { v4 as uuidv4 } from 'uuid';
 
 const Widget = () => {
-	const { widgetOpen, setWidgetOpen } = useContext(GlobalContext);
-	const [socket, setSocket] = useState(null);
+	const { widgetOpen, toggleWidget } = useContext(GlobalContext);
+	const [socket, setSocket] = useState<Socket | null>(null);
 	const [message, setMessage] = useState('');
 	const [customerId, setCustomerId] = useState(localStorage.getItem('BABBLE_CUSTOMER_ID'));
 
 	const handleClick = () => {
-		setWidgetOpen(!widgetOpen);
+		toggleWidget(!widgetOpen);
 	}
 
-	const handleChange = (e) => {
-		setMessage(e.target.value);
+	const handleChange = (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		setMessage(target.value);
 	}
 
 	const sendMessage = () => {
 		if (message.length > 0) {
-			socket.emit('message', message, customerId);
+			socket?.emit('message', message, customerId);
 			setMessage('');
 		}
 	}
 
-	const receiveMessage = (message, test) => {
+	const receiveMessage = (message: string, test: any) => {
 		console.log('receiveMessage', message, test);
 	}
 

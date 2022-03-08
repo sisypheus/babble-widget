@@ -16,6 +16,7 @@
   </p>
 
   <p>
+    prout
     fdsqffdsqfdsqfTo fire an event that handled inside widget, click <a href="javascript:;"
       onclick="aw1('event', 'open')">here to
       open</a>,
@@ -66,7 +67,15 @@
       js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
     }(window, document, 'script', 'aw1', './widget.js'));
     aw1('init',
-      { minimized: true, disableDarkMode: true, mainColor: "#1da1f1" }
+      {
+        debug: false,
+        clientId: '5d8f8f8f-d8f8-f8f8-8f8f-8f8f8f8f8f8f',
+        
+        widget: {
+          mainColor: "#1da1f1",
+          minimized: true,
+        }
+      }
     );
   </script>
 

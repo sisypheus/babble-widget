@@ -1,19 +1,19 @@
 import { h, createContext, ComponentChildren } from 'preact';
 import { useRef, useState } from 'preact/hooks';
-import { Configurations, Globals, WidgetApi } from './models';
+import { AppConfigurations, Globals, WidgetApi } from './models';
 import { ApiClient } from './services/apiClient';
 
 interface Props {
-  element: HTMLElement;
+  element?: HTMLElement;
   children: ComponentChildren;
-  config: Configurations;
+  config: AppConfigurations;
 }
 
 export const GlobalContext = createContext<Globals>({ widgetOpen: false, toggleWidget: (o) => undefined });
 export const ServiceContext = createContext<WidgetApi | undefined>(undefined);
-export const ConfigContext = createContext<Configurations>({} as Configurations);
+export const ConfigContext = createContext<AppConfigurations>({} as AppConfigurations);
 
-export const AppContextProvider = ({ children, element, config }: Props) => {
+export const AppContextProvider = ({ children, config }: Props) => {
   const [widgetOpen, toggleWidget] = useState(false);
 
   const services = useRef(new ApiClient({

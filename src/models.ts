@@ -2,11 +2,6 @@ interface InfraConfigurations {
   element?: HTMLElement;
 }
 
-/**
- * A model representing all possible configurations
- * that can be done from embedded script. Those settings
- * are passed around in application via Context.
- */
 export interface AppConfigurations {
   debug: boolean;
   apiBaseUrl: string;
@@ -20,8 +15,8 @@ export interface AppConfigurations {
     subtitle: string;
     requireEmail: boolean;
     mainColor: string;
-    // green dot to let user know if someone is connected
-    // to the other end of the chat
+    // green dot to let user know if someone is
+    // connected to the other end of the chat
     activityIndicator: boolean;
   }
 }

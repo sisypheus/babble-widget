@@ -1,9 +1,9 @@
 import { h, render } from 'preact';
 import { App } from './App';
 import loader from './loader';
-import { AppConfigurations } from './models';
+import { Configurations } from './models';
 
-const defaultConfiguration: AppConfigurations = {
+const defaultConfiguration: Configurations = {
   debug: false,
   apiBaseUrl: process.env.API_URL || 'http://localhost:8080',
   socketBaseUrl: process.env.SOCKET_URL || 'http://localhost:8000',

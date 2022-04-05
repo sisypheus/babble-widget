@@ -14,8 +14,6 @@ const Widget = () => {
 	const [customerId, setCustomerId] = useState(localStorage.getItem('BABBLE_CUSTOMER_ID'));
 	const config = useContext(ConfigContext);
 
-	console.log(config.widget.mainColor);
-
 	const handleClick = () => {
 		toggleWidget(!widgetOpen);
 	}
@@ -27,13 +25,21 @@ const Widget = () => {
 
 	const sendMessage = () => {
 		if (message.length > 0) {
-			socket?.emit('message', message, customerId);
+			const fullMessage = {
+				content: message,
+				file: undefined,
+				sender: {
+					id: customerId,
+					name: 'Anonymous User',
+				}
+			}
+			socket?.emit('message', fullMessage);
 			setMessage('');
 		}
 	}
 
-	const receiveMessage = (message: string, test: any) => {
-		console.log('receiveMessage', message, test);
+	const receiveMessage = (message: any) => {
+		console.log('receiveMessage', message);
 	}
 
 	useEffect(() => {
@@ -43,10 +49,11 @@ const Widget = () => {
 			setCustomerId(uuid);
 			return;
 		}
-		const socket = socketIOClient('http://localhost:8080', {
+		console.log(config);
+		const socket = socketIOClient('http://localhost:8001', {
 			auth: {
 				token: customerId,
-				clientID: 'prout',
+				company_id: config.clientId
 			}
 		});
 		socket.on('message', receiveMessage);

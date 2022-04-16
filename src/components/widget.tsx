@@ -1,11 +1,11 @@
 import { h } from 'preact';
 import '../index.css';
 import chat_icon from '../assets/icon_chat.svg';
-import { GlobalContext } from '../AppContext';
+import { GlobalContext } from '../context/AppContext';
 import { useContext, useEffect, useState } from 'preact/hooks';
 import socketIOClient, { Socket } from "socket.io-client";
 import { v4 as uuidv4 } from 'uuid';
-import { ConfigContext } from '../AppContext';
+import { ConfigContext } from '../context/AppContext';
 
 const Widget = () => {
 	const { widgetOpen, toggleWidget } = useContext(GlobalContext);
@@ -63,7 +63,7 @@ const Widget = () => {
 	return (
 		<div className='reset'>
 			<div className='fixed bottom-0 right-0 sm:p-6 sm:mb-[4rem]'>
-				<div className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-200 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
+				<div className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-100 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
 					<div>top</div>
 					<div className='relative'>
 						<div className='fixed bottom-0 w-full flex items-center justify-center'>

@@ -34,6 +34,11 @@ export interface Globals {
   toggleWidget: (open: boolean) => void;
 }
 
+export interface Messages {
+  messages: Message[];
+  setMessages: (messages: Message[]) => void;
+}
+
 export interface Message {
   sender: string;
   message: string;

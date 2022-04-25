@@ -1,3 +1,5 @@
+import { Socket } from "socket.io-client";
+
 interface InfraConfigurations {
   element?: HTMLElement;
 }
@@ -5,7 +7,6 @@ interface InfraConfigurations {
 export interface AppConfigurations {
   debug: boolean;
   apiBaseUrl: string;
-  socketBaseUrl: string;
   clientId: string;
   
   widget: {
@@ -21,12 +22,30 @@ export interface AppConfigurations {
   }
 }
 
+export interface CustomerProviderType {
+  customer: Customer | undefined;
+  setCustomer (customer: Customer): void;
+}
+
+export interface MessagesContextType {
+  messages: Message[];
+  setMessages (messages: Message[]): void;
+}
+
+export interface Customer {
+  id: string;
+  email?: string;
+  name?: string;
+}
+
+export interface SocketContextType {
+  socket: Socket | undefined;
+}
+
 export type Configurations = InfraConfigurations & AppConfigurations;
 
 export interface WidgetApi {
-  sendMessage: (message: string, file?: File) => Promise<void>;
-  customerExists: (customerId: string) => Promise<boolean>;
-  getMessages: (handler: Function) => Promise<Message[]>;
+  getSavedMessages(id: string): Promise<Message[]>;
 }
 
 export interface Globals {
@@ -41,10 +60,6 @@ export interface Messages {
 
 export interface Message {
   sender: string;
-  message: string;
+  content: string;
   date: Date;
-}
-
-export interface Customer {
-  pricingPlan: number;
 }

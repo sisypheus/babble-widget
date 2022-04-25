@@ -1,18 +1,19 @@
 import { h } from 'preact';
-import '../index.css';
+import { useContext, useState } from 'preact/hooks';
 import chat_icon from '../assets/icon_chat.svg';
-import { GlobalContext } from '../context/AppContext';
-import { useContext, useEffect, useState } from 'preact/hooks';
-import socketIOClient, { Socket } from "socket.io-client";
-import { v4 as uuidv4 } from 'uuid';
-import { ConfigContext } from '../context/AppContext';
+import { ConfigContext, GlobalContext } from '../context/AppContext';
+import { MessagesContext } from '../context/MessagesContext';
+import { useCustomer } from '../context/CustomerContext';
+import '../index.css';
+import { useSocket } from '../context/SocketContext';
 
 const Widget = () => {
 	const { widgetOpen, toggleWidget } = useContext(GlobalContext);
-	const [socket, setSocket] = useState<Socket | null>(null);
 	const [message, setMessage] = useState('');
-	const [customerId, setCustomerId] = useState(localStorage.getItem('BABBLE_CUSTOMER_ID'));
+	const { customer } = useCustomer()
 	const config = useContext(ConfigContext);
+	const { messages } = useContext(MessagesContext);
+	const { socket } = useSocket();
 
 	const handleClick = () => {
 		toggleWidget(!widgetOpen);
@@ -29,10 +30,11 @@ const Widget = () => {
 				content: message,
 				file: undefined,
 				sender: {
-					id: customerId,
-					name: 'Anonymous User',
+					id: customer!.id,
+					name: customer?.name || 'Anonymous User',
 				}
 			}
+			console.log(socket);
 			socket?.emit('message', fullMessage);
 			setMessage('');
 		}
@@ -42,30 +44,17 @@ const Widget = () => {
 		console.log('receiveMessage', message);
 	}
 
-	useEffect(() => {
-		if (!customerId) {
-			const uuid = uuidv4();
-			localStorage.setItem('BABBLE_CUSTOMER_ID', uuid);
-			setCustomerId(uuid);
-			return;
-		}
-		console.log(config);
-		const socket = socketIOClient('http://localhost:8001', {
-			auth: {
-				token: customerId,
-				company_id: config.clientId
-			}
-		});
-		socket.on('message', receiveMessage);
-		setSocket(socket);
-	}, [customerId]);
-
 	return (
 		<div className='reset'>
 			<div className='fixed bottom-0 right-0 sm:p-6 sm:mb-[4rem]'>
-				<div className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-100 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
-					<div>top</div>
+				<div className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-50 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
+					<div></div>
 					<div className='relative'>
+						<div>
+							{messages.map(message => {
+								return <div>{message.content!}</div>
+							})}
+						</div>
 						<div className='fixed bottom-0 w-full flex items-center justify-center'>
 							<div className="flex items-center justify-center w-full">
 								<input className="w-full" onChange={handleChange} value={message} />
@@ -75,7 +64,7 @@ const Widget = () => {
 					</div>
 				</div>
 				<div className='fixed bottom-0 right-0 p-6'>
-					<img style={{'backgroundColor': config.widget.mainColor}} onClick={handleClick} className={`p-4 rounded-md w-8 h-8 cursor-pointer`} src={chat_icon} alt='chat' />
+					<img style={{ 'backgroundColor': config.widget.mainColor }} onClick={handleClick} className={`p-4 rounded-md w-8 h-8 cursor-pointer`} src={chat_icon} alt='chat' />
 				</div>
 			</div>
 		</div >

@@ -5,8 +5,7 @@ import { Configurations } from './models';
 
 const defaultConfiguration: Configurations = {
   debug: false,
-  apiBaseUrl: process.env.API_URL || 'http://localhost:8080',
-  socketBaseUrl: process.env.SOCKET_URL || 'http://localhost:8000',
+  apiBaseUrl: process.env.API_URL || 'http://localhost:8001',
   clientId: '',
 
   widget: {

@@ -1,48 +1,65 @@
+import { Socket } from "socket.io-client";
+
 interface InfraConfigurations {
   element?: HTMLElement;
 }
 
-/**
- * A model representing all possible configurations
- * that can be done from embedded script. Those settings
- * are passed around in application via Context.
- */
 export interface AppConfigurations {
   debug: boolean;
-  serviceBaseUrl: string;
-  minimized: boolean;
-  disableDarkMode: boolean;
-  text: {
-    minimizedTitle?: string;
-    formTitle?: string;
-    formSubTitle?: string;
-    thankYouTitle?: string;
-    thankYouBody?: string;
-    faqTitle?: string;
-  };
-  styles: {
-    classNameContainer?: string;
-  };
+  apiBaseUrl: string;
+  clientId: string;
+  
+  widget: {
+    initialMessage: string;
+    minimized: boolean;
+    title: string;
+    subtitle: string;
+    requireEmail: boolean;
+    mainColor: string;
+    // green dot to let user know if someone is
+    // connected to the other end of the chat
+    activityIndicator: boolean;
+  }
+}
+
+export interface CustomerProviderType {
+  customer: Customer | undefined;
+  setCustomer (customer: Customer): void;
+}
+
+export interface MessagesContextType {
+  messages: Message[];
+  setMessages (messages: Message[]): void;
+}
+
+export interface Customer {
+  id: string;
+  email?: string;
+  name?: string;
+}
+
+export interface SocketContextType {
+  socket: Socket | undefined;
 }
 
 export type Configurations = InfraConfigurations & AppConfigurations;
 
-export interface FaqModel {
-  question: string;
-  answer: string;
-}
-
-export interface FormModel {
-  email: string;
-  message: string;
-}
-
 export interface WidgetApi {
-  getFaq: () => Promise<FaqModel[]>;
-  sendForm: (model: FormModel) => Promise<void>;
+  getSavedMessages(id: string): Promise<Message[]>;
 }
 
 export interface Globals {
   widgetOpen: boolean;
-  setWidgetOpen: (open: boolean) => void;
+  toggleWidget: (open: boolean) => void;
+}
+
+export interface Messages {
+  messages: Message[];
+  setMessages: (messages: Message[]) => void;
+}
+
+export interface Message {
+  sender: string;
+  content: string;
+  date: Date;
 }

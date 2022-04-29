@@ -45,7 +45,7 @@ export interface SocketContextType {
 export type Configurations = InfraConfigurations & AppConfigurations;
 
 export interface WidgetApi {
-  getSavedMessages(id: string): Promise<Message[]>;
+  getSavedMessages(cursor: number, id?: string): Promise<any>;
 }
 
 export interface Globals {

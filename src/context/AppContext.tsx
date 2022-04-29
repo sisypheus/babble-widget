@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const GlobalContext = createContext<Globals>({ widgetOpen: false, toggleWidget: (o) => undefined });
-export const ServiceContext = createContext<WidgetApi | undefined>(undefined);
+export const ServiceContext = createContext<ApiClient | undefined>(undefined);
 export const ConfigContext = createContext<AppConfigurations>({} as AppConfigurations);
 
 export const AppContextProvider = ({ children, config }: Props) => {

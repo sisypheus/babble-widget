@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import { useContext, useRef, useState } from 'preact/hooks';
 import chat_icon from '../assets/icon_chat.svg';
 import { ConfigContext, GlobalContext } from '../context/AppContext';
 import { MessagesContext } from '../context/MessagesContext';
@@ -12,8 +12,9 @@ const Widget = () => {
 	const [message, setMessage] = useState('');
 	const { customer } = useCustomer()
 	const config = useContext(ConfigContext);
-	const { messages } = useContext(MessagesContext);
+	const { messages, fetchNextPage } = useContext(MessagesContext);
 	const { socket } = useSocket();
+	const ref = useRef<any>(null);
 
 	const handleClick = () => {
 		toggleWidget(!widgetOpen);
@@ -23,6 +24,16 @@ const Widget = () => {
 		const target = e.target as HTMLInputElement;
 		setMessage(target.value);
 	}
+
+	// const trackScrolling = () => {
+	// 	if (!ref.current)
+	// 		return;
+	// 	const { scrollTop, scrollHeight, clientHeight } = ref.current;
+
+	// 	if (-scrollTop + clientHeight >= scrollHeight - 10 && !isFetchingNextPage && hasNextPage) {
+	// 		fetchNextPage();
+	// 	}
+	// }
 
 	const sendMessage = () => {
 		if (message.length > 0) {
@@ -51,9 +62,9 @@ const Widget = () => {
 					<div></div>
 					<div className='relative'>
 						<div>
-							{messages.map(message => {
+							{/* {messages.map(message => {
 								return <div>{message.content!}</div>
-							})}
+							})} */}
 						</div>
 						<div className='fixed bottom-0 w-full flex items-center justify-center'>
 							<div className="flex items-center justify-center w-full">

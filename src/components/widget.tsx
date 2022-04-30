@@ -51,10 +51,6 @@ const Widget = () => {
 		}
 	}
 
-	useEffect(() => {
-		console.log(data);
-	}, [data]);
-
 	const receiveMessage = (message: any) => {
 		console.log('receiveMessage', message);
 	}

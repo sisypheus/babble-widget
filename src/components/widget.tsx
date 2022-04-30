@@ -1,8 +1,8 @@
 import { h } from 'preact';
-import { useContext, useRef, useState } from 'preact/hooks';
+import { useContext, useEffect, useRef, useState } from 'preact/hooks';
 import chat_icon from '../assets/icon_chat.svg';
 import { ConfigContext, GlobalContext } from '../context/AppContext';
-import { MessagesContext } from '../context/MessagesContext';
+import { MessagesContext, useMessages } from '../context/MessagesContext';
 import { useCustomer } from '../context/CustomerContext';
 import '../index.css';
 import { useSocket } from '../context/SocketContext';
@@ -12,7 +12,7 @@ const Widget = () => {
 	const [message, setMessage] = useState('');
 	const { customer } = useCustomer()
 	const config = useContext(ConfigContext);
-	const { messages, fetchNextPage } = useContext(MessagesContext);
+	const { data } = useMessages();
 	const { socket } = useSocket();
 	const ref = useRef<any>(null);
 
@@ -51,6 +51,10 @@ const Widget = () => {
 		}
 	}
 
+	useEffect(() => {
+		console.log(data);
+	}, [data]);
+
 	const receiveMessage = (message: any) => {
 		console.log('receiveMessage', message);
 	}
@@ -62,9 +66,11 @@ const Widget = () => {
 					<div></div>
 					<div className='relative'>
 						<div>
-							{/* {messages.map(message => {
-								return <div>{message.content!}</div>
-							})} */}
+							{data?.pages?.map((messages: any[]) => {
+								return messages.map((message: any) => {
+									return <div>{message.content}</div>
+								})
+							})}
 						</div>
 						<div className='fixed bottom-0 w-full flex items-center justify-center'>
 							<div className="flex items-center justify-center w-full">

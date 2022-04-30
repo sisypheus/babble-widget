@@ -28,8 +28,7 @@ export interface CustomerProviderType {
 }
 
 export interface MessagesContextType {
-  messages: Message[];
-  setMessages (messages: Message[]): void;
+  data: Message[];
 }
 
 export interface Customer {

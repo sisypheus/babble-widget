@@ -51,8 +51,11 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+    "@preact/compat": "^17.0.3",
     "preact": "^10.3.2",
     "preact-render-to-string": "^5.1.4",
+    "react": "npm:@preact/compat@^17.0.3",
+    "react-dom": "npm:@preact/compat@^17.0.3",
     "react-query": "^3.38.0"
   },
   "jest": {

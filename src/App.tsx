@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import Widget from './components/Widget'
+import Widget from './components/widget'
 import { Configurations } from './models';
 import { AppContextProvider } from './context/AppContext';
 import { MessagesContextProvider } from './context/MessagesContext';

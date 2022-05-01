@@ -9,7 +9,7 @@ export const useCustomer = () => {
 }
 
 export const CustomerContextProvider = ({ children }: { children: ComponentChildren }) => {
-  const [customer, setCustomer] = useState<Customer | undefined>(undefined);
+  const [customer, setCustomer] = useState<Customer>({} as Customer);
 
   useEffect(() => {
     const id = localStorage.getItem('BABBLE_CUSTOMER_ID');

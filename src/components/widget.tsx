@@ -6,6 +6,8 @@ import { MessagesContext, useMessages } from '../context/MessagesContext';
 import { useCustomer } from '../context/CustomerContext';
 import '../index.css';
 import { useSocket } from '../context/SocketContext';
+import Message from './Message';
+import { Message as MessageModel } from '../models';
 
 const Widget = () => {
 	const { widgetOpen, toggleWidget } = useContext(GlobalContext);
@@ -15,6 +17,7 @@ const Widget = () => {
 	const { data } = useMessages();
 	const { socket } = useSocket();
 	const ref = useRef<any>(null);
+	const { messages, isFetchingNextPage, fetchNextPage } = useMessages();
 
 	const handleClick = () => {
 		toggleWidget(!widgetOpen);
@@ -25,15 +28,15 @@ const Widget = () => {
 		setMessage(target.value);
 	}
 
-	// const trackScrolling = () => {
-	// 	if (!ref.current)
-	// 		return;
-	// 	const { scrollTop, scrollHeight, clientHeight } = ref.current;
+	const trackScrolling = () => {
+		if (!ref.current)
+			return;
+		const { scrollTop, scrollHeight, clientHeight } = ref.current;
 
-	// 	if (-scrollTop + clientHeight >= scrollHeight - 10 && !isFetchingNextPage && hasNextPage) {
-	// 		fetchNextPage();
-	// 	}
-	// }
+		if (-scrollTop + clientHeight >= scrollHeight - 10 && !isFetchingNextPage) {
+			fetchNextPage();
+		}
+	}
 
 	const sendMessage = () => {
 		if (message.length > 0) {
@@ -56,17 +59,17 @@ const Widget = () => {
 	}
 
 	return (
-		<div className='reset'>
-			<div className='fixed bottom-0 right-0 sm:p-6 sm:mb-[4rem]'>
-				<div className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-50 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
-					<div></div>
-					<div className='relative'>
-						<div>
-							{data?.pages?.map((messages: any[]) => {
-								return messages.map((message: any) => {
-									return <div>{message.content}</div>
-								})
-							})}
+		<div>
+			<div className='reset'>
+				<div className='fixed bottom-0 right-0 sm:p-6 sm:mb-[4rem]'>
+					<div className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-50 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
+						<div className='flex items-center justify-center'>Chat</div>
+						<div className='relative'>
+							<div ref={ref} className='flex flex-col-reverse'>
+								{messages.map((message: MessageModel) => {
+									return <Message message={message} />
+								})}
+							</div>
 						</div>
 						<div className='fixed bottom-0 w-full flex items-center justify-center'>
 							<div className="flex items-center justify-center w-full">
@@ -76,11 +79,11 @@ const Widget = () => {
 						</div>
 					</div>
 				</div>
-				<div className='fixed bottom-0 right-0 p-6'>
-					<img style={{ 'backgroundColor': config.widget.mainColor }} onClick={handleClick} className={`p-4 rounded-md w-8 h-8 cursor-pointer`} src={chat_icon} alt='chat' />
-				</div>
 			</div>
-		</div >
+			<div className='fixed bottom-0 right-0 p-6'>
+				<img style={{ 'backgroundColor': config.widget.mainColor }} onClick={handleClick} className={`p-4 rounded-md w-8 h-8 cursor-pointer`} src={chat_icon} alt='chat' />
+			</div>
+		</div>
 	)
 }
 

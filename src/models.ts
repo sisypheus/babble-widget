@@ -28,7 +28,8 @@ export interface CustomerProviderType {
 }
 
 export interface MessagesContextType {
-  data: Message[];
+  messages: Message[];
+  isFetchingNextPage: boolean;
 }
 
 export interface Customer {
@@ -58,7 +59,9 @@ export interface Messages {
 }
 
 export interface Message {
-  sender: string;
   content: string;
-  date: Date;
+  sender: 'CUSTOMER' | 'COMPANY';
+  createdAt: string;
+  updatedAt: string;
+  admin_id?: string;
 }

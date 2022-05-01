@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from 'preact/hooks';
 import { Message, Messages, MessagesContextType } from '../models';
 import { ServiceContext } from './AppContext';
 import { useCustomer } from './CustomerContext';
-import { useInfiniteQuery, useQueryClient } from 'react-query';
 
 export const MessagesContext = createContext<any>({} as MessagesContextType);
 
@@ -12,23 +11,34 @@ export const useMessages = () => {
 }
 
 export const MessagesContextProvider = ({ children }: { children: ComponentChildren }) => {
-  const [messages, setMessages] = useState([] as Message[]);
+  const [messages, setMessages] = useState([]);
   const apiClient = useContext(ServiceContext)
-  const { customer, setCustomer } = useCustomer();
-  const queryClient = useQueryClient();
+  const { customer } = useCustomer();
+  const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
+  const [cursor, setCursor] = useState(0);
 
-  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, refetch } =
-    useInfiniteQuery<Messages, any>('messages', ({ pageParam = 0 }) => apiClient!.getSavedMessages(pageParam, customer?.id), {
-      getNextPageParam: (lastPage: any, _) => lastPage.cursor
+  const fetchNextPage = () => {
+    setIsFetchingNextPage(true);
+    console.log(customer, "ici");
+    apiClient!.getSavedMessages(cursor, customer?.id).then(res => {
+      setIsFetchingNextPage(false);
+      setCursor(res.cursor);
+      if (res.messages?.length > 0)
+        setMessages(messages.concat(res.messages));
     });
+  }
 
   useEffect(() => {
-    if (customer?.id)
-      refetch();
+    if (!customer?.id)
+      return;
+    apiClient!.getSavedMessages(cursor, customer?.id).then((response) => {
+      setMessages(response.messages);
+      setCursor(response.cursor);
+    });
   }, [customer]);
 
   return (
-    <MessagesContext.Provider value={{ data, setMessages }}>
+    <MessagesContext.Provider value={{ messages, setMessages, isFetchingNextPage, fetchNextPage }}>
       {children}
     </MessagesContext.Provider>
   );

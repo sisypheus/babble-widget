@@ -1,6 +1,7 @@
 import { ComponentChildren, createContext, h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
-import { Customer, CustomerProviderType, Message, Messages } from '../models';
+import { Customer, CustomerProviderType } from '../models';
+import { v4 } from 'uuid';
 
 export const CustomerContext = createContext<CustomerProviderType>({} as CustomerProviderType);
 

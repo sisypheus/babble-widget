@@ -14,7 +14,7 @@ export const ServiceContext = createContext<ApiClient | undefined>(undefined);
 export const ConfigContext = createContext<AppConfigurations>({} as AppConfigurations);
 
 export const AppContextProvider = ({ children, config }: Props) => {
-  const [widgetOpen, toggleWidget] = useState(false);
+  const [widgetOpen, toggleWidget] = useState(!config.widget.minimized);
 
   const services = useRef(new ApiClient({
     baseUrl: config.apiBaseUrl,

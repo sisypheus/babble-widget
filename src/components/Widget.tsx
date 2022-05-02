@@ -1,13 +1,13 @@
 import { h } from 'preact';
-import { useContext, useEffect, useRef, useState } from 'preact/hooks';
+import { useContext, useRef, useState } from 'preact/hooks';
 import chat_icon from '../assets/icon_chat.svg';
 import { ConfigContext, GlobalContext } from '../context/AppContext';
-import { MessagesContext, useMessages } from '../context/MessagesContext';
 import { useCustomer } from '../context/CustomerContext';
-import '../index.css';
+import { useMessages } from '../context/MessagesContext';
 import { useSocket } from '../context/SocketContext';
-import Message from './Message';
+import '../index.css';
 import { Message as MessageModel } from '../models';
+import Message from './Message';
 
 const Widget = () => {
 	const { widgetOpen, toggleWidget } = useContext(GlobalContext);
@@ -34,11 +34,13 @@ const Widget = () => {
 		const { scrollTop, scrollHeight, clientHeight } = ref.current;
 
 		if (-scrollTop + clientHeight >= scrollHeight - 10 && !isFetchingNextPage) {
+			console.log('fetching next page');
 			fetchNextPage();
 		}
 	}
 
-	const sendMessage = () => {
+	const sendMessage = (e: h.JSX.TargetedEvent<HTMLFormElement, Event>) => {
+		e.preventDefault();
 		if (message.length > 0) {
 			const fullMessage = {
 				content: message,
@@ -48,7 +50,6 @@ const Widget = () => {
 					name: customer?.name || 'Anonymous User',
 				}
 			}
-			console.log(socket);
 			socket?.emit('message', fullMessage);
 			setMessage('');
 		}
@@ -62,25 +63,23 @@ const Widget = () => {
 		<div>
 			<div className='reset'>
 				<div className='fixed bottom-0 right-0 sm:p-6 sm:mb-[4rem]'>
-					<div className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-50 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
+					<div className={`transition-all w-screen h-screen duration-200 pb-12 overflow-clip ease-in bg-gray-200 sm:h-[28rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
 						<div>
 							Chat
 						</div>
-						<div className='h-full w-full overflow-auto'>
-							<div className='relative'>
-								<div ref={ref} className='flex flex-col-reverse'>
-									{messages.map((message: MessageModel) => {
-										return <Message message={message} />
-									})}
-								</div>
+						<div className='h-full w-full overflow-y-auto scroll-smooth'>
+							<div ref={ref} onScroll={trackScrolling} className='flex flex-col-reverse'>
+								{messages.map((message: MessageModel) => {
+									return <Message message={message} />
+								})}
 							</div>
 						</div>
-						<div className='relative w-full'>
-							<div className='absolute bottom-0 w-full'>
-								<div className="flex items-center justify-center w-full">
-									<input className="w-full" onChange={handleChange} value={message} />
-									<button onClick={sendMessage}>send</button>
-								</div>
+						<div className='w-full relative'>
+							<div className='fixed bottom-0 w-full'>
+								<form style={{ display: "flex" }} className="w-full items-center" onSubmit={(e) => sendMessage(e)}>
+									<input className="p-2 outline-none" onChange={handleChange} value={message} />
+									<button>send</button>
+								</form>
 							</div>
 						</div>
 					</div>

@@ -63,18 +63,24 @@ const Widget = () => {
 			<div className='reset'>
 				<div className='fixed bottom-0 right-0 sm:p-6 sm:mb-[4rem]'>
 					<div className={`transition-all w-screen h-screen duration-200 ease-in bg-gray-50 sm:h-[30rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
-						<div className='flex items-center justify-center'>Chat</div>
-						<div className='relative'>
-							<div ref={ref} className='flex flex-col-reverse'>
-								{messages.map((message: MessageModel) => {
-									return <Message message={message} />
-								})}
+						<div>
+							Chat
+						</div>
+						<div className='h-full w-full overflow-auto'>
+							<div className='relative'>
+								<div ref={ref} className='flex flex-col-reverse'>
+									{messages.map((message: MessageModel) => {
+										return <Message message={message} />
+									})}
+								</div>
 							</div>
 						</div>
-						<div className='fixed bottom-0 w-full flex items-center justify-center'>
-							<div className="flex items-center justify-center w-full">
-								<input className="w-full" onChange={handleChange} value={message} />
-								<button onClick={sendMessage}>send</button>
+						<div className='relative w-full'>
+							<div className='absolute bottom-0 w-full'>
+								<div className="flex items-center justify-center w-full">
+									<input className="w-full" onChange={handleChange} value={message} />
+									<button onClick={sendMessage}>send</button>
+								</div>
 							</div>
 						</div>
 					</div>

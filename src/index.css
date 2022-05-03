@@ -2,107 +2,482 @@
 @tailwind components;
 @tailwind utilities;
 
-.scope {
-  --border-radius: 5px;
-  --color: #118bee;
-  --color-bg: #fff;
-  --color-bg-secondary: #e9e9e9;
-  --color-secondary: #920de9;
-  --color-text: #000;
-  --color-text-secondary: #999;
-  --color-error: #cb2431;
-  --hover-brightness: 1.2;
-  --hover-opacity: 0.5;
-  --line-height: 150%;
-}
+@layer base {
 
-@media (prefers-color-scheme: dark) {
-  .scope:not(.noDark) {
-    --color-bg: #333333;
-    --color-bg-secondary: #555;
-    --color-secondary: #2BB14C;
-    --color-text: #fff;
-    --color-text-secondary: #666;
-    --color-error: #f44336;
+  .reset *,
+  .reset ::before,
+  .reset ::after {
+    box-sizing: border-box;
+    /* 1 */
+    border-width: 0;
+    /* 2 */
+    border-style: solid;
+    /* 2 */
+    border-color: theme('borderColor.DEFAULT', currentColor);
+    /* 2 */
   }
-}
 
-.reset {
-  composes: scope;
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  margin: 0;
-}
+  .reset ::before,
+  .reset ::after {
+    --tw-content: '';
+    /*
+     1. Use a consistent sensible line-height in all browsers.
+     2. Prevent adjustments of font size after orientation changes in iOS.
+     3. Use a more readable tab size.
+     4. Use the user's configured `sans` font-family by default.
+     */
+  }
 
-.reset h1, .reset h2, .reset h3, .reset h4, .reset h5, .reset h6 {
-  line-height: var(--line-height);
-}
+  .reset html {
+    line-height: 1.5;
+    /* 1 */
+    -webkit-text-size-adjust: 100%;
+    /* 2 */
+    -moz-tab-size: 4;
+    /* 3 */
+    tab-size: 4;
+    /* 3 */
+    font-family: theme('fontFamily.sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    /* 4 */
+    /*
+     1. Remove the margin in all browsers.
+     2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+     */
+  }
 
-.reset p {
-  padding: 0;
-}
+  .reset body {
+    margin: 0;
+    /* 1 */
+    line-height: inherit;
+    /* 2 */
+    /*
+     1. Add the correct height in Firefox.
+     2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+     3. Ensure horizontal rules are visible by default.
+     */
+  }
 
-.reset small {
-  color: var(--color-text-secondary);
-}
+  .reset hr {
+    height: 0;
+    /* 1 */
+    color: inherit;
+    /* 2 */
+    border-top-width: 1px;
+    /* 3 */
+    /*
+     Add the correct text decoration in Chrome, Edge, and Safari.
+     */
+  }
 
-.reset a {
-  color: var(--color-secondary);
-  font-weight: bold;
-  text-decoration: none;
-}
+  .reset abbr:where([title]) {
+    text-decoration: underline dotted;
+    /*
+     Remove the default font size and weight for headings.
+     */
+  }
 
-.reset a:hover {
-  filter: brightness(var(--hover-brightness));
-  text-decoration: underline;
-}
+  .reset h1,
+  .reset h2,
+  .reset h3,
+  .reset h4,
+  .reset h5,
+  .reset h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    /*
+     Reset links to optimize for opt-in styling instead of opt-out.
+     */
+  }
 
-.reset button {
-  border-radius: var(--border-radius);
-  display: inline-block;
-  font-size: medium;
-  font-weight: bold;
-}
+  .reset a {
+    color: inherit;
+    text-decoration: inherit;
+    /*
+     Add the correct font weight in Edge and Safari.
+     */
+  }
 
-.reset button:hover:not(:disabled) {
-  cursor: pointer;
-  filter: brightness(var(--hover-brightness));
-}
+  .reset b,
+  .reset strong {
+    font-weight: bolder;
+    /*
+     1. Use the user's configured `mono` font family by default.
+     2. Correct the odd `em` font sizing in all browsers.
+     */
+  }
 
-.reset button {
-  background-color: var(--color);
-  border: 2px solid var(--color);
-  color: var(--color-bg);
-}
-.reset button:disabled {
-  cursor: default;
-  background-color: var(--color-bg-secondary);
-}
+  .reset code,
+  .reset kbd,
+  .reset samp,
+  .reset pre {
+    font-family: theme('fontFamily.mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    /* 1 */
+    font-size: 1em;
+    /* 2 */
+    /*
+     Add the correct font size in all browsers.
+     */
+  }
 
-.reset form {
-  display: block;
-}
+  .reset small {
+    font-size: 80%;
+    /*
+     Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+     */
+  }
 
-.reset form header {
-  margin: 1.5rem 0;
-  padding: 1.5rem 0;
-}
+  .reset sub,
+  .reset sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
 
-.reset input, .reset label, .reset select, .reset textarea {
-  display: block;
-  font-size: inherit;
-}
+  .reset sub {
+    bottom: -0.25em;
+  }
 
-.reset input, .reset textarea {
-  border: 1px solid var(--color-bg-secondary);
-  border-radius: var(--border-radius);
-  padding: 0.4rem 0.8rem;
-  width: 100%;
-  box-sizing: border-box;
-}
+  .reset sup {
+    top: -0.5em;
+    /*
+     1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+     2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+     3. Remove gaps between table borders by default.
+     */
+  }
 
-.reset label {
-  font-weight: bold;
-  margin-bottom: 0.2rem;
+  .reset table {
+    text-indent: 0;
+    /* 1 */
+    border-color: inherit;
+    /* 2 */
+    border-collapse: collapse;
+    /* 3 */
+    /*
+     1. Change the font styles in all browsers.
+     2. Remove the margin in Firefox and Safari.
+     3. Remove default padding in all browsers.
+     */
+  }
+
+  .reset button,
+  .reset input,
+  .reset optgroup,
+  .reset select,
+  .reset textarea {
+    font-family: inherit;
+    /* 1 */
+    font-size: 100%;
+    /* 1 */
+    line-height: inherit;
+    /* 1 */
+    color: inherit;
+    /* 1 */
+    margin: 0;
+    /* 2 */
+    padding: 0;
+    /* 3 */
+    /*
+     Remove the inheritance of text transform in Edge and Firefox.
+     */
+  }
+
+  .reset button,
+  .reset select {
+    text-transform: none;
+    /*
+     1. Correct the inability to style clickable types in iOS and Safari.
+     2. Remove default button styles.
+     */
+  }
+
+  .reset button,
+  .reset [type='button'],
+  .reset [type='reset'],
+  .reset [type='submit'] {
+    -webkit-appearance: button;
+    /* 1 */
+    background-color: transparent;
+    /* 2 */
+    background-image: none;
+    /* 2 */
+    /*
+     Use the modern Firefox focus style for all focusable elements.
+     */
+  }
+
+  .reset :-moz-focusring {
+    outline: auto;
+    /*
+     Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+     */
+  }
+
+  .reset :-moz-ui-invalid {
+    box-shadow: none;
+    /*
+     Add the correct vertical alignment in Chrome and Firefox.
+     */
+  }
+
+  .reset progress {
+    vertical-align: baseline;
+    /*
+     Correct the cursor style of increment and decrement buttons in Safari.
+     */
+  }
+
+  .reset ::-webkit-inner-spin-button,
+  .reset ::-webkit-outer-spin-button {
+    height: auto;
+    /*
+     1. Correct the odd appearance in Chrome and Safari.
+     2. Correct the outline style in Safari.
+     */
+  }
+
+  .reset [type='search'] {
+    -webkit-appearance: textfield;
+    /* 1 */
+    outline-offset: -2px;
+    /* 2 */
+    /*
+     Remove the inner padding in Chrome and Safari on macOS.
+     */
+  }
+
+  .reset ::-webkit-search-decoration {
+    -webkit-appearance: none;
+    /*
+     1. Correct the inability to style clickable types in iOS and Safari.
+     2. Change font properties to `inherit` in Safari.
+     */
+  }
+
+  .reset ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    /* 1 */
+    font: inherit;
+    /* 2 */
+    /*
+     Add the correct display in Chrome and Safari.
+     */
+  }
+
+  .reset summary {
+    display: list-item;
+    /*
+     Removes the default spacing and border for appropriate elements.
+     */
+  }
+
+  .reset blockquote,
+  .reset dl,
+  .reset dd,
+  .reset h1,
+  .reset h2,
+  .reset h3,
+  .reset h4,
+  .reset h5,
+  .reset h6,
+  .reset hr,
+  .reset figure,
+  .reset p,
+  .reset pre {
+    margin: 0;
+  }
+
+  .reset fieldset {
+    margin: 0;
+    padding: 0;
+  }
+
+  .reset legend {
+    padding: 0;
+  }
+
+  .reset ol,
+  .reset ul,
+  .reset menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /*
+     Prevent resizing textareas horizontally by default.
+     */
+  }
+
+  .reset textarea {
+    resize: vertical;
+    /*
+     1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+     2. Set the default placeholder color to the user's configured gray 400 color.
+     */
+  }
+
+  .reset input::placeholder,
+  .reset textarea::placeholder {
+    opacity: 1;
+    /* 1 */
+    color: theme('colors.gray.400', #9ca3af);
+    /* 2 */
+    /*
+     Set the default cursor for buttons.
+     */
+  }
+
+  .reset button,
+  .reset [role="button"] {
+    cursor: pointer;
+    /*
+     Make sure disabled buttons don't get the pointer cursor.
+     */
+  }
+
+  .reset :disabled {
+    cursor: default;
+    /*
+     1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+     2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+     This can trigger a poorly considered lint error in some tools but is included by design.
+     */
+  }
+
+  .reset img,
+  .reset svg,
+  .reset video,
+  .reset canvas,
+  .reset audio,
+  .reset iframe,
+  .reset embed,
+  .reset object {
+    display: block;
+    /* 1 */
+    vertical-align: middle;
+    /* 2 */
+    /*
+     Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+     */
+  }
+
+  .reset img,
+  .reset video {
+    max-width: 100%;
+    height: auto;
+    /*
+     Ensure the default browser behavior of the `hidden` attribute.
+     */
+  }
+
+  .reset [hidden] {
+    display: none;
+  }
+
+  .scope {
+    --border-radius: 5px;
+    --color: #118bee;
+    --color-bg: #fff;
+    --color-bg-secondary: #e9e9e9;
+    --color-secondary: #920de9;
+    --color-text: #000;
+    --color-text-secondary: #999;
+    --color-error: #cb2431;
+    --hover-brightness: 1.2;
+    --hover-opacity: 0.5;
+    --line-height: 150%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .scope:not(.noDark) {
+      --color-bg: #333333;
+      --color-bg-secondary: #555;
+      --color-secondary: #2BB14C;
+      --color-text: #fff;
+      --color-text-secondary: #666;
+      --color-error: #f44336;
+    }
+  }
+
+  .reset {
+    composes: scope;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    margin: 0;
+  }
+
+  .reset h1,
+  .reset h2,
+  .reset h3,
+  .reset h4,
+  .reset h5,
+  .reset h6 {
+    line-height: var(--line-height);
+  }
+
+  .reset p {
+    padding: 0;
+  }
+
+  .reset small {
+    color: var(--color-text-secondary);
+  }
+
+  .reset a {
+    color: var(--color-secondary);
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .reset a:hover {
+    filter: brightness(var(--hover-brightness));
+    text-decoration: underline;
+  }
+
+  .reset button {
+    display: inline-block;
+    font-size: medium;
+    font-weight: bold;
+  }
+
+  .reset button:hover:not(:disabled) {
+    cursor: pointer;
+    filter: brightness(var(--hover-brightness));
+  }
+
+  .reset button {
+    background-color: var(--color);
+    color: var(--color-bg);
+    border: none;
+  }
+
+  .reset button:disabled {
+    cursor: default;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .reset form {
+    display: block;
+  }
+
+  .reset form header {}
+
+  .reset input,
+  .reset label,
+  .reset select,
+  .reset textarea {
+    display: block;
+    font-size: inherit;
+  }
+
+  .reset input,
+  .reset textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .reset label {
+    font-weight: bold;
+  }
 }

@@ -63,12 +63,12 @@ const Widget = () => {
 		<div>
 			<div className='reset'>
 				<div className='fixed bottom-0 right-0 sm:p-6 sm:mb-[4rem]'>
-					<div className={`transition-all w-screen h-screen duration-200 pb-12 overflow-clip ease-in bg-gray-200 sm:h-[28rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
+					<div className={`transition-all w-screen border border-gray-400 h-screen duration-200 pb-12 overflow-clip ease-in bg-gray-200 sm:h-[28rem] sm:w-[18rem] rounded-md ${widgetOpen ? 'opacity-100 sm:-translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
 						<div>
 							Chat
 						</div>
-						<div className='h-full w-full overflow-y-auto scroll-smooth'>
-							<div ref={ref} onScroll={trackScrolling} className='flex flex-col-reverse'>
+						<div ref={ref} onScroll={trackScrolling} className='h-full w-full overflow-y-auto flex flex-col-reverse scroll-smooth'>
+							<div className='flex flex-col-reverse'>
 								{messages.map((message: MessageModel) => {
 									return <Message message={message} />
 								})}
@@ -76,8 +76,8 @@ const Widget = () => {
 						</div>
 						<div className='w-full relative'>
 							<div className='fixed bottom-0 w-full'>
-								<form style={{ display: "flex" }} className="w-full items-center" onSubmit={(e) => sendMessage(e)}>
-									<input className="p-2 outline-none" onChange={handleChange} value={message} />
+								<form className='flex w-full items-center' onSubmit={(e) => sendMessage(e)}>
+									<input className='w-full p-2 border-0 outline-none' onChange={handleChange} value={message} />
 									<button>send</button>
 								</form>
 							</div>

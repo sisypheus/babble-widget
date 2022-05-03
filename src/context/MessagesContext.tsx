@@ -16,10 +16,12 @@ export const MessagesContextProvider = ({ children }: { children: ComponentChild
   const { customer } = useCustomer();
   const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
   const [cursor, setCursor] = useState(0);
+  const [lastPage, setLastPage] = useState(false);
 
   const fetchNextPage = () => {
+    if (!cursor)
+      return;
     setIsFetchingNextPage(true);
-    console.log(customer, "ici");
     apiClient!.getSavedMessages(cursor, customer?.id).then(res => {
       setIsFetchingNextPage(false);
       setCursor(res.cursor);

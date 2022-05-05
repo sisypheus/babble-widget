@@ -12,18 +12,27 @@ export const useCustomer = () => {
 export const CustomerContextProvider = ({ children }: { children: ComponentChildren }) => {
   const [customer, setCustomer] = useState<Customer>({} as Customer);
 
+  const createNewCustomer = (): Customer => {
+    const newCustomer: Customer = {
+      id: v4(),
+      name: 'Anonymous User',
+      email: undefined,
+    };
+    return newCustomer;
+  }
+
   useEffect(() => {
-    const id = localStorage.getItem('BABBLE_CUSTOMER_ID');
-    if (!id)
-      return
-    const name = localStorage.getItem('BABBLE_CUSTOMER_NAME') ?? undefined;
-    const email = localStorage.getItem('BABBLE_CUSTOMER_EMAIL') ?? undefined;
-    setCustomer({
-      id,
-      name,
-      email,
-    });
+    const existingCustomer = localStorage.getItem('customer');
+    if (existingCustomer)
+      return setCustomer(JSON.parse(existingCustomer));
+    const newCustomer = createNewCustomer();
+    setCustomer(newCustomer);
   }, [])
+
+  useEffect(() => {
+    if (customer)
+      localStorage.setItem('customer', JSON.stringify(customer));
+  }, [customer]);
 
   return (
     <CustomerContext.Provider value={{ customer, setCustomer }}>

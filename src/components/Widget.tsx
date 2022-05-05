@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useContext, useRef, useState } from 'preact/hooks';
+import { useContext, useEffect, useRef, useState } from 'preact/hooks';
 import chat_icon from '../assets/icon_chat.svg';
 import { ConfigContext, GlobalContext } from '../context/AppContext';
 import { useCustomer } from '../context/CustomerContext';
@@ -14,10 +14,9 @@ const Widget = () => {
 	const [message, setMessage] = useState('');
 	const { customer } = useCustomer()
 	const config = useContext(ConfigContext);
-	const { data } = useMessages();
 	const { socket } = useSocket();
 	const ref = useRef<any>(null);
-	const { messages, isFetchingNextPage, fetchNextPage } = useMessages();
+	const { messages, setMessages, isFetchingNextPage, fetchNextPage } = useMessages();
 
 	const handleClick = () => {
 		toggleWidget(!widgetOpen);
@@ -56,8 +55,16 @@ const Widget = () => {
 	}
 
 	const receiveMessage = (message: any) => {
-		console.log('receiveMessage', message);
+		setMessages((prev: any[]) => {
+			return [message, ...prev];
+		});
 	}
+
+	useEffect(() => {
+		if (!socket)
+			return;
+		socket.on('message', receiveMessage);
+	}, [socket]);
 
 	return (
 		<div>
@@ -67,7 +74,7 @@ const Widget = () => {
 						<div>
 							Chat
 						</div>
-						<div ref={ref} onScroll={trackScrolling} className='h-full w-full overflow-y-auto flex flex-col-reverse scroll-smooth'>
+						<div ref={ref} onScroll={trackScrolling} className='h-full w-full overflow-y-auto flex flex-col-reverse scroll-smooth overscroll-contain'>
 							<div className='flex flex-col-reverse'>
 								{messages.map((message: MessageModel) => {
 									return <Message message={message} />

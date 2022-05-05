@@ -1,9 +1,9 @@
 import { ComponentChildren, createContext, h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
+import { io, Socket } from 'socket.io-client';
 import { SocketContextType } from '../models';
 import { ConfigContext, ServiceContext } from './AppContext';
 import { useCustomer } from './CustomerContext';
-import { io, Socket } from 'socket.io-client';
 
 export const SocketContext = createContext<SocketContextType>({} as SocketContextType);
 
@@ -12,7 +12,6 @@ export const useSocket = () => {
 }
 
 export const SocketContextProvider = ({ children }: { children: ComponentChildren }) => {
-  const apiClient = useContext(ServiceContext)
   const { customer, setCustomer } = useCustomer();
   const [socket, setSocket] = useState<Socket | undefined>(undefined);
   const config = useContext(ConfigContext);

@@ -6,10 +6,6 @@ type Props = {
 }
 
 const Message = ({ message }: Props) => {
-  const displayMessage = (message: MessageModel) => {
-
-  }
-
   return (
     message.sender === "CUSTOMER" ? (
       <div className='p-2 flex items-end justify-end'>{message.content}</div>

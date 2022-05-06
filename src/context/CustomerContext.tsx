@@ -23,7 +23,7 @@ export const CustomerContextProvider = ({ children }: { children: ComponentChild
 
   useEffect(() => {
     const existingCustomer = localStorage.getItem('customer');
-    if (existingCustomer)
+    if (existingCustomer && existingCustomer !== '{}')
       return setCustomer(JSON.parse(existingCustomer));
     const newCustomer = createNewCustomer();
     setCustomer(newCustomer);

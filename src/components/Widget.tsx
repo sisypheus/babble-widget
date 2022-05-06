@@ -55,6 +55,7 @@ const Widget = () => {
 	}
 
 	const receiveMessage = (message: any) => {
+		console.log(message);
 		setMessages((prev: any[]) => {
 			return [message, ...prev];
 		});

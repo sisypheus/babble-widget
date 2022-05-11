@@ -7,7 +7,8 @@ type Props = {
 
 const Message = ({ message }: Props) => {
   return (
-    message.sender === "CUSTOMER" ? (
+    console.log(message),
+    message?.sender === "CUSTOMER" || (message as any).customer ? (
       <div className='p-2 flex items-end justify-end'>{message.content}</div>
     ) : (
       <div className='p-2 flex items-start justify-start'>{message.content}</div>

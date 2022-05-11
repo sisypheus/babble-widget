@@ -47,15 +47,18 @@ const Widget = () => {
 				sender: {
 					id: customer!.id,
 					name: customer?.name || 'Anonymous User',
-				}
+				},
+				customer: true,
 			}
 			socket?.emit('message', fullMessage);
 			setMessage('');
+			setMessages((prev: any[]) => {
+				return [fullMessage, ...prev]
+			});
 		}
 	}
 
 	const receiveMessage = (message: any) => {
-		console.log(message);
 		setMessages((prev: any[]) => {
 			return [message, ...prev];
 		});

@@ -20,7 +20,6 @@ export class ApiClient {
   public async getSavedMessages(cursor: number, id?: string): Promise<any> {
     if (!id)
       return [];
-    console.log(cursor, "getSavedMessages");
     const response = await this.client.get(`/chat/conversations/${id}?cursor=${cursor}`);
     return response.data;
   }

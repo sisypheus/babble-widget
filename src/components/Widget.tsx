@@ -49,6 +49,7 @@ const Widget = () => {
 					name: customer?.name || 'Anonymous User',
 				},
 				customer: true,
+				createdAt: Date.now(),
 			}
 			socket?.emit('message', fullMessage);
 			setMessage('');
@@ -81,8 +82,12 @@ const Widget = () => {
 							</div>
 							<div ref={ref} onScroll={trackScrolling} className='h-full w-full flex-grow flex-shrink overflow-y-auto flex flex-col-reverse scroll-smooth overscroll-contain'>
 								<div className='flex flex-col-reverse'>
-									{messages.map((message: MessageModel) => {
-										return <Message message={message} />
+									{messages.map((message: MessageModel, index: number) => {
+										return (
+											<div key={index} className="py-[2px]">
+												<Message messages={messages} index={index} message={message} />
+											</div>
+										)
 									})}
 								</div>
 							</div>

@@ -24,10 +24,8 @@ module.exports = (env) => {
         new webpack.SourceMapDevToolPlugin(),
         new copyWebpackPlugin({ patterns: [{ from: 'dev/' }] }),
         new webpack.DefinePlugin({
-          'process.env': {
-            'API_URL': JSON.stringify(process.env.PREACT_APP_API_URL),
-            'SOCKET_URL': JSON.stringify(process.env.PREACT_APP_SOCKET_URL),
-          },
+          'process.env.API_URL': JSON.stringify(process.env.PREACT_APP_API_URL),
+          'process.env.SOCKET_URL': JSON.stringify(process.env.PREACT_APP_SOCKET_URL),
         }),
       ]
       : [],

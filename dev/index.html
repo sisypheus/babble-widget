@@ -16,14 +16,6 @@
   </p>
 
   <p>
-    prout
-    fdsqffdsqfdsqfTo fire an event that handled inside widget, click <a href="javascript:;"
-      onclick="aw1('event', 'open')">here to
-      open</a>,
-    and here <a href="javascript:;" onclick="aw1('event', 'close')">to close it</a>.
-  </p>
-
-  <p>
     Below is a text that doesn't make sense at all.</p>
   <p>Orci purus ante excepteur nunc nascetur rhoncus taciti ut. Ornare vitae sed. Amet suspendisse
     integer rutrum
@@ -54,25 +46,18 @@
   <button id="button" style="position: fixed; bottom:0; right: 0; margin: 10rem">test</button>
 
   <script>
-    let button = document.getElementById('button');
-    button.addEventListener('click', () => {
-      console.log('yteah baby');
-    });
-  </script>
-
-  <script>
     (function (w, d, s, o, f, js, fjs) {
       w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
       js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
       js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
-    }(window, document, 'script', 'aw1', './widget.js'));
+    }(window, document, 'script', 'aw1', 'https://cdn.jsdelivr.net/gh/sisypheus/babble-widget-release@master/widget.js'));
     aw1('init',
       {
         debug: false,
-        clientId: '3bcc4bb0-93e1-49f2-b14f-247667f6ea5f',
+        clientId: '8c7ef3f2-50ba-4cf7-8ed3-dc16927bac4e',
         widget: {
           mainColor: "#1da1f1",
-          minimized: false,
+          minimized: true,
         }
       }
     );

@@ -16,15 +16,14 @@ const Message = ({ message, messages, index }: Props) => {
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff / 1000) / 60);
-    if (days > 0) {
+    if (days > 0)
       return `${days > 1 ? days + " days" : days + " day"} ago`;
-    } else if (hours > 0) {
+    else if (hours > 0)
       return `${days > 1 ? hours + " hours" : hours + " hour"} ago`;
-    } else if (minutes > 0) {
+    else if (minutes > 0)
       return `${minutes > 1 ? minutes + " minutes" : minutes + " minute"} ago`;
-    } else {
-      return "Seconds ago";
-    }
+    else
+      return "Just now";
   }
 
   const displayDate = (sender: string, customer: boolean): boolean => {

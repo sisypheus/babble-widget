@@ -14,7 +14,7 @@ const defaultConfiguration: Configurations = {
     title: 'Chat',
     subtitle: '',
     requireEmail: false,
-    mainColor: '#2563eb',
+    color: '#2563eb',
     activityIndicator: false,
   }
 }

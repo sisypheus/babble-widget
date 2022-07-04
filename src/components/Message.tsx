@@ -1,4 +1,6 @@
 import { h } from 'preact';
+import { useContext } from 'preact/hooks';
+import { ConfigContext } from '../context/AppContext';
 import { Message as MessageModel } from '../models';
 
 type Props = {
@@ -9,6 +11,7 @@ type Props = {
 
 const Message = ({ message, messages, index }: Props) => {
   const nextMessage = index == 0 ? undefined : messages.at(index - 1);
+	const config = useContext(ConfigContext);
 
   const formatDate = (date: string) => {
     const formatted = new Date(date);
@@ -37,7 +40,7 @@ const Message = ({ message, messages, index }: Props) => {
   return (
     message?.sender === "CUSTOMER" || (message as any).customer ? (
       <div className='flex flex-col px-4 items-end justify-end'>
-        <p className='px-4 py-2 rounded bg-blue-500 text-white'>
+        <p style={{backgroundColor: config.widget.color }} className='px-4 py-2 rounded text-white'>
           {message.content}
         </p>
         <p>{displayDate(message.sender, true) && formatDate(message.createdAt)}</p>

@@ -15,9 +15,7 @@ export interface AppConfigurations {
     title: string;
     subtitle: string;
     requireEmail: boolean;
-    mainColor: string;
-    // green dot to let user know if someone is
-    // connected to the other end of the chat
+    color: string;
     activityIndicator: boolean;
   }
 }

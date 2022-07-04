@@ -75,10 +75,10 @@ const Widget = () => {
 		<div>
 			<div className='reset'>
 				<div className='fixed bottom-0 sm:right-0 right-4 sm-p-4 m-auto sm:p-6 mb-[4rem]'>
-					<div className={`transition-all relative overflow-clip shadow-2xl border border-gray-400 flex-grow flex-shrink basis-0 duration-200 h-[calc(100vh-20rem)] sm:h-[calc(100vh-12rem)] w-[calc(100vw-2rem)] sm:w-[24rem] max-h-[700px] min-h-[300px] ease-in bg-white rounded-md ${widgetOpen ? 'opacity-100 -translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
+					<div className={`transition-all relative overflow-clip shadow-2xl border-0 border-gray-400 flex-grow flex-shrink basis-0 duration-200 h-[calc(100vh-20rem)] sm:h-[calc(100vh-12rem)] w-[calc(100vw-2rem)] sm:w-[24rem] max-h-[700px] min-h-[300px] ease-in bg-white rounded-md ${widgetOpen ? 'opacity-100 -translate-y-10' : 'transition-none absolute invisible opacity-0 '}`}>
 						<div className='flex flex-col flex-shrink basis-0 h-full'>
-							<div className='py-6 border-b border-gray-400'>
-								Chat
+							<div style={{backgroundColor: config.widget.color}} className='py-6 border-0 text-white border-b border-gray-400'>
+                {config.widget.title ?? 'Chat with us!'}
 							</div>
 							<div ref={ref} onScroll={trackScrolling} className='h-full w-full flex-grow flex-shrink overflow-y-auto flex flex-col-reverse scroll-smooth overscroll-contain'>
 								<div className='flex flex-col-reverse'>
@@ -91,9 +91,9 @@ const Widget = () => {
 									})}
 								</div>
 							</div>
-							<form className='flex p-3 items-center border bg-white' onSubmit={(e) => sendMessage(e)}>
+							<form className='flex p-3 items-center border-y bg-white' onSubmit={(e) => sendMessage(e)}>
 								<input placeholder='Posez votre question' className='w-full p-2 border-0 outline-none' onChange={handleChange} value={message} />
-								<button className='text-white fill-white p-3 bg-blue-500 rounded-full'>
+								<button style={{backgroundColor: config.widget.color}} className='text-white fill-white p-3 rounded-full'>
 									<Send />
 								</button>
 							</form>
@@ -102,7 +102,7 @@ const Widget = () => {
 				</div>
 			</div>
 			<div className='fixed bottom-0 right-0 p-6 sm:p-6'>
-				<img style={{ 'backgroundColor': config.widget.mainColor }} onClick={handleClick} className={`p-4 rounded-md w-8 h-8 cursor-pointer`} src={chat_icon} alt='chat' />
+				<img style={{ 'backgroundColor': config.widget.color }} onClick={handleClick} className={`p-4 rounded-md w-8 h-8 cursor-pointer`} src={chat_icon} alt='chat' />
 			</div>
 		</div>
 	)

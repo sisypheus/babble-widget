@@ -1,10 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
-const dotenv = require('dotenv').config();
 var copyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env) => {
   const isDevBuild = env?.prod ? false : true;
+  const envPath = isDevBuild ? '.env' : '.env.production';
+  const dotenv = require('dotenv').config({ path: envPath });
   const bundleOutputDir = isDevBuild ? './dist' : './build';
 
   return [{
@@ -29,7 +30,7 @@ module.exports = (env) => {
         }),
       ]
       : [
-          new webpack.DefinePlugin({
+        new webpack.DefinePlugin({
           'process.env.API_URL': JSON.stringify(process.env.PREACT_APP_API_URL),
           'process.env.SOCKET_URL': JSON.stringify(process.env.PREACT_APP_SOCKET_URL),
         }),

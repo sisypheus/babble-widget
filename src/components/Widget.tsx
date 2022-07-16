@@ -1,5 +1,6 @@
 import { h } from "preact";
 import { useContext, useEffect, useRef, useState } from "preact/hooks";
+import tinycolor from "tinycolor2";
 import chat_icon from "../assets/icon_chat.svg";
 import { ConfigContext, GlobalContext } from "../context/AppContext";
 import { useCustomer } from "../context/CustomerContext";
@@ -9,7 +10,6 @@ import "../index.css";
 import { Message as MessageModel } from "../models";
 import Message from "./Message";
 import Send from "./Send";
-import tinycolor from "tinycolor2";
 
 const Widget = () => {
   const { widgetOpen, toggleWidget } = useContext(GlobalContext);
@@ -71,14 +71,12 @@ const Widget = () => {
     socket.on("message", receiveMessage);
   }, [socket]);
 
-  const color = tinycolor(config.widget.color);
-
   return (
     <div>
       <div className="reset">
         <div className="fixed bottom-0 sm:right-0 right-4 sm-p-4 m-auto sm:p-6 mb-[4rem]">
           <div
-            className={`transition-all relative overflow-clip shadow-2xl border-0 border-gray-400 flex-grow flex-shrink basis-0 duration-200 h-[calc(100vh-20rem)] sm:h-[calc(100vh-12rem)] w-[calc(100vw-2rem)] sm:w-[24rem] max-h-[700px] min-h-[300px] ease-in bg-white rounded-md ${
+            className={`transition-all relative overflow-clip shadow-2xl border-0 border-gray-400 flex-grow flex-shrink basis-0 duration-200 h-[calc(100vh-20rem)] sm:h-[calc(100vh-12rem)] w-[calc(100vw-2rem)] sm:w-[24rem] max-h-[700px] min-h-[300px] ease-in bg-white rounded-lg ${
               widgetOpen
                 ? "opacity-100 -translate-y-10"
                 : "transition-none absolute invisible opacity-0 "
@@ -87,15 +85,23 @@ const Widget = () => {
             <div className="flex flex-col flex-shrink basis-0 h-full">
               <div
                 style={{ backgroundColor: config.widget.color }}
-                className="py-6 border-0 text-white border-b border-gray-400"
+                className="py-5 px-4 border-0 text-white border-b border-gray-400"
               >
-                {config.widget.title ?? "Welcome to the company"}
+                <p className="text-lg">
+                  {config.widget.title ?? "Welcome to the company"}
+                </p>
               </div>
               <div
-                style={{ backgroundColor: color.lighten().toString() }}
+                style={{
+                  backgroundColor:
+                    tinycolor(config.widget.color).lighten().toString() ??
+                    "#6ca1f8",
+                }}
                 className="py-1 text-gray-200"
               >
-                {config.widget.subtitle ?? "Chat with us!"}
+                <p className="px-4 py-[2px]">
+                  {config.widget.subtitle ?? "Chat with us!"}
+                </p>
               </div>
               <div
                 ref={ref}
@@ -120,11 +126,12 @@ const Widget = () => {
                 className="flex p-3 items-center border-y bg-white"
                 onSubmit={(e) => sendMessage(e)}
               >
-                <input
+                <textarea
                   placeholder="Type your question ✍️..."
-                  className="w-full p-2 border-0 outline-none"
+                  className="w-full p-2 border-0 outline-none resize-none"
                   onChange={handleChange}
                   value={message}
+                  rows={1}
                 />
                 <button
                   style={{ backgroundColor: config.widget.color }}

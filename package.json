@@ -23,6 +23,7 @@
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
+    "@types/tinycolor2": "^1.4.3",
     "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
@@ -52,7 +53,8 @@
   },
   "dependencies": {
     "preact": "^10.3.2",
-    "preact-render-to-string": "^5.1.4"
+    "preact-render-to-string": "^5.1.4",
+    "tinycolor2": "^1.4.2"
   },
   "jest": {
     "preset": "jest-preset-preact",

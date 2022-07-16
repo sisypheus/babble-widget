@@ -9,6 +9,7 @@ import "../index.css";
 import { Message as MessageModel } from "../models";
 import Message from "./Message";
 import Send from "./Send";
+import tinycolor from "tinycolor2";
 
 const Widget = () => {
   const { widgetOpen, toggleWidget } = useContext(GlobalContext);
@@ -70,6 +71,8 @@ const Widget = () => {
     socket.on("message", receiveMessage);
   }, [socket]);
 
+  const color = tinycolor(config.widget.color);
+
   return (
     <div>
       <div className="reset">
@@ -89,8 +92,8 @@ const Widget = () => {
                 {config.widget.title ?? "Welcome to the company"}
               </div>
               <div
-                style={{ backgroundColor: config.widget.color }}
-                className="brightness-110 py-1 text-white"
+                style={{ backgroundColor: color.lighten().toString() }}
+                className="py-1 text-gray-200"
               >
                 {config.widget.subtitle ?? "Chat with us!"}
               </div>
@@ -118,7 +121,7 @@ const Widget = () => {
                 onSubmit={(e) => sendMessage(e)}
               >
                 <input
-                  placeholder="Posez votre question"
+                  placeholder="Type your question ✍️..."
                   className="w-full p-2 border-0 outline-none"
                   onChange={handleChange}
                   value={message}

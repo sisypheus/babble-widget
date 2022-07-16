@@ -18,6 +18,7 @@
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
     "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
     "outDir": ".build",
     "jsx": "react",
     "jsxFactory": "h"

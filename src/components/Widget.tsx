@@ -74,7 +74,7 @@ const Widget = () => {
   return (
     <div>
       <div className="reset">
-        <div className="tw-fixed tw-bottom-0 sm:tw-right-0 tw-right-4 sm:tw-p-4 tw-m-auto sm:tw-p-6 mb:tw-[4rem]">
+        <div className="tw-fixed tw-bottom-0 sm:tw-right-0 tw-right-4 sm:tw-p-4 tw-m-auto sm:tw-p-6 sm:tw-pb-20">
           <div
             className={`tw-transition-all tw-relative tw-overflow-clip tw-shadow-2xl tw-border-0 tw-border-gray-400 tw-flex-grow tw-flex-shrink tw-basis-0 tw-duration-200 tw-h-[calc(100vh-20rem)] sm:tw-h-[calc(100vh-12rem)] tw-w-[calc(100vw-2rem)] sm:tw-w-[24rem] tw-max-h-[700px] tw-min-h-[300px] tw-ease-in tw-bg-white tw-rounded-lg ${
               widgetOpen
@@ -82,12 +82,12 @@ const Widget = () => {
                 : "tw-transition-none tw-absolute tw-invisible tw-opacity-0 "
             }`}
           >
-            <div className="flex flex-col flex-shrink basis-0 h-full">
+            <div className="tw-flex tw-flex-col tw-flex-shrink tw-basis-0 tw-h-full">
               <div
                 style={{ backgroundColor: config.widget.color }}
-                className="py-5 px-4 border-0 tw-text-white border-b border-gray-400"
+                className="tw-py-5 tw-px-4 tw-border-0 tw-text-white tw-border-b tw-border-gray-400"
               >
-                <p className="text-lg">
+                <p className="tw-text-lg">
                   {config.widget.title ?? "Welcome to the company"}
                 </p>
               </div>
@@ -97,21 +97,21 @@ const Widget = () => {
                     tinycolor(config.widget.color).lighten().toString() ??
                     "#6ca1f8",
                 }}
-                className="py-1 text-gray-200"
+                className="tw-py-1 tw-text-gray-200"
               >
-                <p className="px-4 py-[2px]">
+                <p className="tw-px-4 tw-py-[2px]">
                   {config.widget.subtitle ?? "Chat with us!"}
                 </p>
               </div>
               <div
                 ref={ref}
                 onScroll={trackScrolling}
-                className="h-full tw-w-full flex-grow flex-shrink overflow-y-auto flex flex-col-reverse scroll-smooth overscroll-contain"
+                className="tw-h-full tw-w-full tw-flex-grow tw-flex-shrink tw-overflow-y-auto tw-flex tw-flex-col-reverse tw-scroll-smooth tw-overscroll-contain"
               >
-                <div className="flex flex-col-reverse">
+                <div className="tw-flex tw-flex-col-reverse">
                   {messages.map((message: MessageModel, index: number) => {
                     return (
-                      <div key={index} className="py-[2px]">
+                      <div key={index} className="tw-py-[2px]">
                         <Message
                           messages={messages}
                           index={index}
@@ -123,12 +123,12 @@ const Widget = () => {
                 </div>
               </div>
               <form
-                className="flex p-3 items-center border-y bg-white"
+                className="tw-flex tw-p-3 tw-items-center tw-border-y tw-bg-white"
                 onSubmit={(e) => sendMessage(e)}
               >
                 <textarea
                   placeholder="Type your question ✍️..."
-                  className="tw-w-full p-2 border-0 outline-none resize-none"
+                  className="tw-w-full tw-p-2 tw-border-0 tw-outline-none tw-resize-none"
                   onChange={handleChange}
                   value={message}
                   rows={1}

@@ -148,7 +148,7 @@ const Widget = () => {
         <img
           style={{ backgroundColor: config.widget.color }}
           onClick={handleClick}
-          className={`tw-p-4 tw-rounded-md tw-w-8 tw-h-8 tw-cursor-pointer`}
+          className={`tw-p-4 tw-rounded-md tw-w-16 tw-h-16 tw-cursor-pointer`}
           src={chat_icon}
           alt="chat"
         />

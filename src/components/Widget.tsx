@@ -145,13 +145,18 @@ const Widget = () => {
         </div>
       </div>
       <div className="tw-fixed tw-bottom-0 tw-right-0 tw-p-6 sm:tw-p-6">
-        <img
+        <div
           style={{ backgroundColor: config.widget.color }}
           onClick={handleClick}
-          className={`tw-p-4 tw-rounded-md tw-w-16 tw-h-16 tw-cursor-pointer`}
-          src={chat_icon}
-          alt="chat"
-        />
+          className="tw-p-4 tw-rounded-md tw-cursor-pointer"
+        >
+          <img
+            style={{ backgroundColor: config.widget.color }}
+            className={`tw-w-8 tw-h-8`}
+            src={chat_icon}
+            alt="chat"
+          />
+        </div>
       </div>
     </div>
   );

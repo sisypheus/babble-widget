@@ -30,3 +30,9 @@ jobs:
         user_name: 'CICD'
         commit_message: 'CICD: New release'
         destination_branch: 'master'
+
+    - name: Purge cdn ache
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: 'https://purge.jsdelivr.net/gh/sisypheus/babble-widget-release@master/widget.js'
+        method: 'GET'

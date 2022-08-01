@@ -74,18 +74,18 @@ const Widget = () => {
   return (
     <div>
       <div className="reset">
-        <div className="fixed bottom-0 sm:right-0 right-4 sm-p-4 m-auto sm:p-6 mb-[4rem]">
+        <div className="tw-fixed tw-bottom-0 sm:tw-right-0 tw-right-4 sm:tw-p-4 tw-m-auto sm:tw-p-6 mb:tw-[4rem]">
           <div
-            className={`transition-all relative overflow-clip shadow-2xl border-0 border-gray-400 flex-grow flex-shrink basis-0 duration-200 h-[calc(100vh-20rem)] sm:h-[calc(100vh-12rem)] w-[calc(100vw-2rem)] sm:w-[24rem] max-h-[700px] min-h-[300px] ease-in bg-white rounded-lg ${
+            className={`tw-transition-all tw-relative tw-overflow-clip tw-shadow-2xl tw-border-0 tw-border-gray-400 tw-flex-grow tw-flex-shrink tw-basis-0 tw-duration-200 tw-h-[calc(100vh-20rem)] sm:tw-h-[calc(100vh-12rem)] tw-w-[calc(100vw-2rem)] sm:tw-w-[24rem] tw-max-h-[700px] tw-min-h-[300px] tw-ease-in tw-bg-white tw-rounded-lg ${
               widgetOpen
-                ? "opacity-100 -translate-y-10"
-                : "transition-none absolute invisible opacity-0 "
+                ? "tw-opacity-100 -tw-translate-y-10"
+                : "tw-transition-none tw-absolute tw-invisible tw-opacity-0 "
             }`}
           >
             <div className="flex flex-col flex-shrink basis-0 h-full">
               <div
                 style={{ backgroundColor: config.widget.color }}
-                className="py-5 px-4 border-0 text-white border-b border-gray-400"
+                className="py-5 px-4 border-0 tw-text-white border-b border-gray-400"
               >
                 <p className="text-lg">
                   {config.widget.title ?? "Welcome to the company"}
@@ -106,7 +106,7 @@ const Widget = () => {
               <div
                 ref={ref}
                 onScroll={trackScrolling}
-                className="h-full w-full flex-grow flex-shrink overflow-y-auto flex flex-col-reverse scroll-smooth overscroll-contain"
+                className="h-full tw-w-full flex-grow flex-shrink overflow-y-auto flex flex-col-reverse scroll-smooth overscroll-contain"
               >
                 <div className="flex flex-col-reverse">
                   {messages.map((message: MessageModel, index: number) => {
@@ -128,14 +128,14 @@ const Widget = () => {
               >
                 <textarea
                   placeholder="Type your question ✍️..."
-                  className="w-full p-2 border-0 outline-none resize-none"
+                  className="tw-w-full p-2 border-0 outline-none resize-none"
                   onChange={handleChange}
                   value={message}
                   rows={1}
                 />
                 <button
                   style={{ backgroundColor: config.widget.color }}
-                  className="text-white fill-white p-3 rounded-full"
+                  className="tw-text-white tw-fill-white tw-p-3 tw-rounded-full"
                 >
                   <Send />
                 </button>
@@ -144,11 +144,11 @@ const Widget = () => {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 right-0 p-6 sm:p-6">
+      <div className="tw-fixed tw-bottom-0 tw-right-0 tw-p-6 sm:tw-p-6">
         <img
           style={{ backgroundColor: config.widget.color }}
           onClick={handleClick}
-          className={`p-4 rounded-md w-8 h-8 cursor-pointer`}
+          className={`tw-p-4 tw-rounded-md tw-w-8 tw-h-8 tw-cursor-pointer`}
           src={chat_icon}
           alt="chat"
         />

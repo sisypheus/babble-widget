@@ -1,5 +1,6 @@
 module.exports = {
   important: true,
+  prefix: "tw-",
   corePlugins: {
     preflight: false,
   },

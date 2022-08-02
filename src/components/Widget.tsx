@@ -85,7 +85,7 @@ const Widget = () => {
             <div className="tw-flex tw-flex-col tw-flex-shrink tw-basis-0 tw-h-full">
               <div
                 style={{ backgroundColor: config.widget.color }}
-                className="tw-py-5 tw-px-4 tw-border-0 tw-text-white tw-border-b tw-border-gray-400"
+                className="tw-py-5 tw-px-4 tw-border-0 tw-text-white"
               >
                 <p className="tw-text-lg">
                   {config.widget.title ?? "Welcome to the company"}
@@ -97,7 +97,7 @@ const Widget = () => {
                     tinycolor(config.widget.color).lighten().toString() ??
                     "#6ca1f8",
                 }}
-                className="tw-py-1 tw-text-gray-200"
+                className="tw-py-1 tw-text-gray-100"
               >
                 <p className="tw-px-4 tw-py-[2px]">
                   {config.widget.subtitle ?? "Chat with us!"}

@@ -9,7 +9,6 @@ import { CustomerContextProvider } from './context/CustomerContext';
 type Props = Configurations;
 
 export const App = ({ element, ...appSettings }: Props) => {
-  console.log(appSettings)
   return (
     <AppContextProvider config={appSettings}>
       <CustomerContextProvider>

@@ -22,8 +22,6 @@ export const AppContextProvider = ({ children, config }: Props) => {
     clientId: config.clientId,
   }))
 
-  console.log(config);
-
   return (
     <ConfigContext.Provider value={config}>
       <ServiceContext.Provider value={services.current}>

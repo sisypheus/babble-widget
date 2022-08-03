@@ -76,7 +76,7 @@ const Widget = () => {
       <div className="reset">
         <div className="tw-fixed tw-bottom-0 sm:tw-right-0 tw-right-4 sm:tw-p-4 tw-m-auto sm:tw-p-6 tw-pb-16 sm:tw-pb-20">
           <div
-            className={`tw-transition-all tw-relative tw-overflow-clip tw-shadow-2xl tw-border-0 tw-border-gray-400 tw-flex-grow tw-flex-shrink tw-basis-0 tw-duration-200 tw-h-[calc(100vh-20rem)] sm:tw-h-[calc(100vh-12rem)] tw-w-[calc(100vw-2rem)] sm:tw-w-[24rem] tw-max-h-[700px] tw-min-h-[300px] tw-ease-in tw-bg-white tw-rounded-lg ${
+            className={`tw-transition-all tw-relative tw-overflow-clip tw-shadow-2xl tw-border-0 tw-border-gray-400 tw-flex-grow tw-flex-shrink tw-basis-0 tw-duration-200 tw-h-[calc(100vh-12rem)] tw-w-[calc(100vw-2rem)] sm:tw-w-[24rem] tw-max-h-[700px] tw-min-h-[300px] tw-ease-in tw-bg-white tw-rounded-lg ${
               widgetOpen
                 ? "tw-opacity-100 -tw-translate-y-10"
                 : "tw-transition-none tw-absolute tw-invisible tw-opacity-0 "

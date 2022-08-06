@@ -85,7 +85,7 @@ const Widget = () => {
             <div className="tw-flex tw-flex-col tw-flex-shrink tw-basis-0 tw-h-full">
               <div
                 style={{ backgroundColor: config.widget.color }}
-                className="tw-py-5 tw-px-4 tw-border-0 tw-text-white"
+                className="tw-py-5 tw-px-4 tw-border-0 tw-text-white tw-rounded-t-lg"
               >
                 <p className="tw-text-lg">
                   {config.widget.title ?? "Welcome to the company"}
@@ -123,12 +123,12 @@ const Widget = () => {
                 </div>
               </div>
               <form
-                className="tw-flex tw-p-3 tw-items-center tw-border-y tw-bg-white"
+                className="tw-flex tw-p-3 tw-items-center tw-border-y tw-bg-white tw-rounded-b-lg"
                 onSubmit={(e) => sendMessage(e)}
               >
                 <textarea
                   placeholder="Type your question ✍️..."
-                  className="tw-w-full tw-p-2 tw-border-0 tw-outline-none tw-resize-none"
+                  className="tw-w-full tw-p-2 tw-border-0 tw-outline-none tw-resize-none "
                   onChange={handleChange}
                   value={message}
                   rows={1}
@@ -148,7 +148,7 @@ const Widget = () => {
         <div
           style={{ backgroundColor: config.widget.color }}
           onClick={handleClick}
-          className="tw-p-4 tw-rounded-md tw-cursor-pointer"
+          className="tw-p-4 tw-rounded-md tw-cursor-pointer tw-flex tw-align-center"
         >
           <img
             style={{ backgroundColor: config.widget.color }}

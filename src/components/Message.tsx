@@ -42,7 +42,7 @@ const Message = ({ message, messages, index }: Props) => {
     <div className="tw-flex tw-flex-col tw-px-4 tw-items-end tw-justify-end">
       <p
         style={{ backgroundColor: config.widget.color }}
-        className="tw-p-2 tw-rounded tw-text-white"
+        className="tw-p-2 tw-rounded tw-text-white tw-whitespace-pre-line"
       >
         {message.content}
       </p>
@@ -52,7 +52,9 @@ const Message = ({ message, messages, index }: Props) => {
     </div>
   ) : (
     <div className="tw-flex tw-flex-col tw-px-4 tw-items-start tw-justify-start">
-      <p className="tw-p-2 tw-rounded tw-bg-gray-300">{message.content}</p>
+      <p className="tw-p-2 tw-rounded tw-bg-gray-300 tw-whitespace-pre-line">
+        {message.content}
+      </p>
       <p>
         {displayDate(message.sender, false) && formatDate(message.createdAt)}
       </p>

@@ -13,11 +13,11 @@ import Send from "./Send";
 
 const Widget = () => {
   const { widgetOpen, toggleWidget } = useContext(GlobalContext);
-  const [message, setMessage] = useState("");
   const { customer } = useCustomer();
   const config = useContext(ConfigContext);
   const { socket } = useSocket();
   const ref = useRef<any>(null);
+  const [message, setMessage] = useState("");
   const { messages, setMessages, isFetchingNextPage, fetchNextPage } =
     useMessages();
 
@@ -39,8 +39,7 @@ const Widget = () => {
     }
   };
 
-  const sendMessage = (e: h.JSX.TargetedEvent<HTMLFormElement, Event>) => {
-    e.preventDefault();
+  const sendMessage = (message: string) => {
     if (message.length > 0) {
       const fullMessage = {
         content: message,
@@ -54,8 +53,8 @@ const Widget = () => {
       };
       socket?.emit("message", fullMessage);
       setMessage("");
-      setMessages((prev: any[]) => {
-        return [fullMessage, ...prev];
+      setMessages((prevMessages: any[]) => {
+        return [fullMessage, ...prevMessages];
       });
     }
   };
@@ -64,6 +63,13 @@ const Widget = () => {
     setMessages((prev: any[]) => {
       return [message, ...prev];
     });
+  };
+
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage(e.target.value);
+    }
   };
 
   useEffect(() => {
@@ -122,13 +128,11 @@ const Widget = () => {
                   })}
                 </div>
               </div>
-              <form
-                className="tw-flex tw-p-3 tw-items-center tw-border-y tw-bg-white tw-rounded-b-lg"
-                onSubmit={(e) => sendMessage(e)}
-              >
+              <form className="tw-flex tw-p-3 tw-items-center tw-border-y tw-bg-white tw-rounded-b-lg">
                 <textarea
                   placeholder="Type your question ✍️..."
                   className="tw-w-full tw-p-2 tw-border-0 tw-outline-none tw-resize-none "
+                  onKeyPress={handleKeyDown}
                   onChange={handleChange}
                   value={message}
                   rows={1}
@@ -136,6 +140,8 @@ const Widget = () => {
                 <button
                   style={{ backgroundColor: config.widget.color }}
                   className="tw-text-white tw-fill-white tw-p-3 tw-rounded-full"
+                  type="button"
+                  onClick={() => sendMessage(message)}
                 >
                   <Send />
                 </button>
